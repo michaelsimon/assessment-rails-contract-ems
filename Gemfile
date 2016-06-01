@@ -18,6 +18,7 @@ group :development, :test do
   gem 'launchy'
   gem 'better_errors'
   gem 'pry'
+  gem 'rails-erd'
 end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
