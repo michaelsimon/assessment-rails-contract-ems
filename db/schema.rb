@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601020959) do
+ActiveRecord::Schema.define(version: 20160602191159) do
 
   create_table "acts", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 20160601020959) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "approvals", force: :cascade do |t|
+    t.integer  "contract_id"
+    t.integer  "user_id"
+    t.datetime "date_requested"
+    t.datetime "date_answered"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "approvals", ["contract_id"], name: "index_approvals_on_contract_id"
+  add_index "approvals", ["user_id"], name: "index_approvals_on_user_id"
 
   create_table "contracts", force: :cascade do |t|
     t.integer  "performance_id"
@@ -49,6 +62,31 @@ ActiveRecord::Schema.define(version: 20160601020959) do
 
   add_index "performances", ["act_id"], name: "index_performances_on_act_id"
   add_index "performances", ["venue_id"], name: "index_performances_on_venue_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "phone"
+    t.string   "role"
+    t.integer  "venue_id"
+    t.integer  "act_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "venues", force: :cascade do |t|
     t.string   "name"
