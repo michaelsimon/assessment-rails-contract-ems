@@ -18,6 +18,7 @@ class ContractsController < ApplicationController
   end
 
   def update
+    raise
     if @contract.update(contract_params)
       redirect_to @contract
     else
@@ -26,6 +27,7 @@ class ContractsController < ApplicationController
   end
 
   def show
+    @users = User.all
   end
 
   def index

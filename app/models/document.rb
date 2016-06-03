@@ -1,3 +1,3 @@
 class Document < ActiveRecord::Base
-  belongs_to :contract_id
+  belongs_to :contract
 end

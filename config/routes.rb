@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :acts
   resources :approvals
-  resources :contracts
+  resources :contracts do
+    resources :documents
+  end
   resources :performances
   # resources :users
   resources :venues

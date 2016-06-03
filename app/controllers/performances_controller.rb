@@ -6,7 +6,7 @@ class PerformancesController < ApplicationController
   end
 
   def create
-    @performance = Act.new(performance_params)
+    @performance = Performance.new(performance_params)
     if @performance.save
       redirect_to @performance
     else
