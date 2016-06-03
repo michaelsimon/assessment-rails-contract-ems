@@ -1,0 +1,18 @@
+<%= form_for @performance do |f| %>
+  <%= render partial: "shared/errors", locals: {md: @performance} %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: "form-control" %><br>
+  <%= f.label :act_id %>
+  <%= f.collection_select(:act_id, Act.all, :id, :name)  %><br>
+  <%= f.label :venue_id %>
+  <%= f.collection_select(:venue_id, Venue.all, :id, :name)  %><br>
+  <%= f.label :description %>
+  <%= f.text_field :description, class: "form-control" %><br>
+  <%= f.label 'Performance Date' %>
+  <%= f.text_field :perf_date, class: "form-control" %><br>
+  <%= f.label 'Performance Time' %>
+  <%= f.text_field :perf_time, class: "form-control" %><br>
+  <%= f.label 'Ticketing Website' %>
+  <%= f.text_field :tkts_url, class: "form-control" %><br>
+  <%= f.submit %>
+<% end %>
