@@ -29,7 +29,7 @@ class PerformancesController < ApplicationController
   end
 
   def index
-    @performances = Performance.all
+    @performances = policy_scope(Performance)
   end
 
   def destroy

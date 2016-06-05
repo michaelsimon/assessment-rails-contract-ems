@@ -30,7 +30,7 @@ class ActsController < ApplicationController
   end
 
   def index
-    @acts = Act.all
+    @acts = policy_scope(Act)
   end
 
   def destroy

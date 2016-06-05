@@ -31,7 +31,7 @@ class ContractsController < ApplicationController
   end
 
   def index
-    @contracts = Contract.all
+    @contracts = policy_scope(Contract)
   end
 
   def destroy

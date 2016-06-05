@@ -30,7 +30,7 @@ class VenuesController < ApplicationController
   end
 
   def index
-    @venues = Venue.all
+    @venues = policy_scope(Venue)
   end
 
   def destroy
