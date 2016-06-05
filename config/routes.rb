@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :performances
   # resources :users
   resources :venues
+
+  post 'approvals/:id/approve' => 'approvals#approve', as: :approve
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -13,6 +13,9 @@ class ApprovalsController < ApplicationController
     #code
   end
 
+  def approve
+  end
+
   private
   def get_approval
     @approval = Approval.find(params[:id])

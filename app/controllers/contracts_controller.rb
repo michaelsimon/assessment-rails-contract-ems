@@ -18,7 +18,6 @@ class ContractsController < ApplicationController
   end
 
   def update
-    raise
     if @contract.update(contract_params)
       redirect_to @contract
     else
@@ -27,7 +26,8 @@ class ContractsController < ApplicationController
   end
 
   def show
-    @users = User.all
+    @approvals = Approval.where(contract_id: @contract.id)
+    @documents = Document.where(contract_id: @contract.id)
   end
 
   def index

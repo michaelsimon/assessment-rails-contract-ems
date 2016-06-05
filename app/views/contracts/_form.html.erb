@@ -3,9 +3,9 @@
   <%= f.label :performance %>
   <%= f.collection_select(:performance_id, Performance.all, :id, :performance_string, include_blank: 'Select')  %><br>
   <%= f.label :submit_date %>
-  <%= f.text_field :submit_date, class: "form-control" %><br>
+  <%= f.date_field :submit_date, class: "form-control" %><br>
   <%= f.label :due_date %>
-  <%= f.text_field :due_date, class: "form-control" %><br>
+  <%= f.date_field :due_date, class: "form-control" %><br>
   <%= f.label :status %>
   <%= f.text_field :status, class: "form-control" %><br>
   <%= f.label :details %><br>
@@ -15,7 +15,7 @@
 <p>Add Approvers</p>
 <%= f.fields_for :approvals, @contract.approvals.build do |f_approval| %>
 User: <%= f_approval.collection_select(:user_id, User.all, :id, :email, include_blank: 'Select') %><br>
-Date Due: <%= f_approval.text_field 'date_requested' %><br>
+Date Due: <%= f_approval.date_field :date_requested %><br>
 <% end %>
 <%= f.submit %>
 <% end %>

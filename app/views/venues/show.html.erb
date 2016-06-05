@@ -1,0 +1,19 @@
+<h1><%= @venue.name %></h1>
+<p>
+  Address:<br>
+  <%= @venue.address %><br>
+  <%= "#{@venue.city}, #{@venue.state}  #{@venue.zipcode}" %>
+</p>
+<p>
+  Phone: <%= @venue.phone %><br>
+  E-mail: <%= @venue.email %><br>
+  Website: <%= @venue.website %><br>
+</p>
+
+Users:
+<% @users.each do |u| %>
+<p><%= "#{u.first_name} #{u.last_name}" %><br>
+  <%= u.title %><br>
+  Phone: <%= tel_to(u.phone) %> | E-mail: <%= mail_to u.email %>
+</p>
+<% end %>

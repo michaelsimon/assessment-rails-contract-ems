@@ -26,6 +26,7 @@ class VenuesController < ApplicationController
   end
 
   def show
+    @users = @venue.users
   end
 
   def index

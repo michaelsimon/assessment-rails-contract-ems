@@ -1,0 +1,34 @@
+<h1><%= @act.name %></h1>
+<p>About:<br />
+<%= @act.description %></p>
+<p>
+  Location: <%= @act.location %><br>
+  Size: <%= @act.size %><br>
+  Website: <%= link_to @act.website %><br>
+</p>
+
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <div class="panel-heading"><strong>Upcoming Shows for <%= @act.name %></strong></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Venue</th>
+        <th>Date</th>
+        <th>Contract</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
+      <tr>
+        <td><%= perf.name %>  <%= link_to '(i)', performance_path(perf.id) %></td>
+          <!-- <a href="/shows/"><i class="fa fa-arrow-circle-right"></i></a> -->
+        <td><%= perf.venue.name %> <%= link_to '(i)', venue_path(perf.venue.id) %></td>
+          <!-- <a href="/venues/"><i class="fa fa-arrow-circle-right"></i></a></td> -->
+        <td><%= perf.fmatdate %></td>
+        <td>&nbsp;</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

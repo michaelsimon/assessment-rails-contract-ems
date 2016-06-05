@@ -26,6 +26,7 @@ class ActsController < ApplicationController
   end
 
   def show
+    @performances = @act.performances
   end
 
   def index

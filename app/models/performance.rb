@@ -6,4 +6,13 @@ class Performance < ActiveRecord::Base
   def performance_string
     "#{name} - #{venue.name} - #{perf_date}"
   end
+
+  def fmatdate
+    perf_date.strftime("%a %m/%d/%Y")
+  end
+
+  def fmattime
+    perf_time.strftime("%I:%M %p")
+  end
+
 end
