@@ -27,6 +27,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    redirect_to @document.location
   end
 
   def index
@@ -34,12 +35,14 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    #code
+    @document.delete if @document
+    redirect_to contract_path(@document.contract)
   end
 
   private
   def get_document
     @document = Document.find(params[:id])
+    @contract = @document.contract
   end
 
   def document_params

@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-8"><h1>All Contracts</h1></div>
+</div>
+
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <!-- <div class="panel-heading"><strong>Upcoming Performances</strong></div> -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Act</th>
+        <th>Venue</th>
+        <th>Perf Date</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contracts.order(due_date: :asc).each do |contract| %>
+      <tr>
+        <td class="col-md-2"><%= contract.performance.name %></td>
+        <td><%= contract.performance.act.name %>  <a href="/acts/<%= contract.performance.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= contract.performance.venue.name %>  <a href="/venues/<%= contract.performance.venue.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= contract.performance.fmatdate %></td><td><%= contract.status %></td>
+        <td><a href="/contracts/<%= contract.id %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/contracts/<%= contract.id %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/contracts/<%= contract.id %>/delete"><i class="fa fa-trash"></i></a></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

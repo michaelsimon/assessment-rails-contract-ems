@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :venues
 
   post 'approvals/:id/approve' => 'approvals#approve', as: :approve
+  post 'approvals/:id/cancel' => 'approvals#cancel', as: :cancel_approval
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

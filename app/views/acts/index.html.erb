@@ -1,0 +1,26 @@
+<div class="row">
+ <div class="col-sm-offset-1 col-sm-8"><h1>All Acts</h1></div>
+</div>
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+ <table class="table">
+   <thead>
+     <tr>
+       <th>Name</th>
+       <th>Description</th>
+       <th>Size</th>
+       <th>Location</th>
+       <th>Website</th>
+       <th>&nbsp;</th>
+     </tr>
+   </thead>
+   <tbody>
+     <% @acts.each do |act| %>
+     <tr><td class="col-md-2"><%= act.name %></td><td  class="col-md-3"><%= act.description %></td><td  class="col-md-1"><%= act.size %></td>
+       <td  class="col-md-2"><%= act.location %></td><td  class="col-md-2"><%= link_to act.website, act.website %></td><td>links</td></tr>
+       <% end %>
+       <% if @acts.empty? %>
+       <tr><td colspan="5">No data to list</td></tr>
+       <% end %>
+     </tbody>
+   </table>
+ </div>

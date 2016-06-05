@@ -17,3 +17,47 @@ Users:
   Phone: <%= tel_to(u.phone) %> | E-mail: <%= mail_to u.email %>
 </p>
 <% end %>
+
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <div class="panel-heading"><strong>Upcoming Performances at <%= @venue.name %></strong></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Act</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @venue.performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
+      <tr>
+        <td><%= perf.name %>  <a href="/performances/<%= perf.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.act.name %>  <a href="/acts/<%= perf.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.fmatdate %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <div class="panel-heading"><strong>Past Performances</strong></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Act</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @venue.performances.order(perf_date: :desc).where('perf_date < ?', Date.today).each do |perf| %>
+      <tr>
+        <td><%= perf.name %>  <a href="/performances/<%= perf.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.act.name %>  <a href="/acts/<%= perf.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.fmatdate %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

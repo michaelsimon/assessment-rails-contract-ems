@@ -1,24 +1,37 @@
 class ApprovalsController < ApplicationController
-  before_action :get_approval, only: [:show, :edit, :update, :destroy]
+  before_action :get_approval, only: [:update, :destroy, :approve, :cancel]
 
   def update
     #code
   end
 
-  def show
-    #code
+  def destroy
+    @approval.delete if @approval
+    redirect_to contract_path(@approval.contract)
   end
 
-  def destroy
-    #code
+  def cancel
+    if @approval && current_user.is_admin
+      @approval.mark_cancelled
+      redirect_to contract_path(@approval.contract_id)
+    else
+      redirect_to :back
+    end
   end
 
   def approve
+    if @approval && (@approval.user_id == current_user.id || current_user.is_admin)
+      @approval.mark_approved
+      redirect_to contract_path(@approval.contract_id)
+    else
+      redirect_to :back
+    end
   end
 
   private
+
   def get_approval
-    @approval = Approval.find(params[:id])
+    @approval = Approval.find_by(id: params[:id])
   end
 
   def approval_params

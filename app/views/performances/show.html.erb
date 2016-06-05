@@ -1,0 +1,12 @@
+<p>&nbsp;</p>
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+    <div style="float: right;"><a href="/shows/<%= @performance.id %>/edit"><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<a href="/shows/<%= @performance.id %>/delete"><i class="fa fa-trash fa-lg"></i></a></div>
+<h1><%= @performance.name %></h1>
+
+<p><strong>Date: </strong><%= @performance.fmatdate %> | <strong>Time: </strong><%= @performance.fmattime %></p>
+<p><strong>Act: </strong><%= link_to @performance.act.name, act_path(@performance.act)  %></p>
+<p><strong>Venue: </strong><%= link_to @performance.venue.name, venue_path(@performance.venue)  %></p>
+<p><strong>Description: </strong><br /><%= @performance.description  %></p>
+<p><strong>Ticketing: </strong><%= link_to @performance.tkts_url, @performance.tkts_url, target: 'blank'  %></p>
+<p><%= link_to 'View Contract', contract_path(@performance.contract) %></p>
+</div>

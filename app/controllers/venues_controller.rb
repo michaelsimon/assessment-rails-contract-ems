@@ -34,6 +34,8 @@ class VenuesController < ApplicationController
   end
 
   def destroy
+    @venue.delete if @venue
+    redirect_to venues_path
   end
 
   private

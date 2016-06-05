@@ -3,12 +3,14 @@ class Contract < ActiveRecord::Base
   has_many :documents
   has_many :approvals
 
-  def approvals_attributes=(approval_attributes)  ##instead of  accepts_nested_attributes_for
+  def approvals_attributes=(approval_attributes)
     approval_attributes.values.each do |approval_attribute|
 
       if !approval_attribute[:user_id].blank?
-        approval = Approval.find_or_create_by(approval_attribute)
+        approval = Approval.find_or_initialize_by(approval_attribute)
+        approval.status = "pending" if !approval.persisted?
         binding.pry
+        approval.save
         self.approvals << approval
       end
     end

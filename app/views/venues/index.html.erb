@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-8"><h1>All Venues</h1></div>
+</div>
+
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Phone</th>
+        <th>E-Mail</th>
+        <th>Website</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @venues.each do |venue| %>
+      <tr><td class="col-md-2"><%= venue.name %></td><td><%= venue.city %>, <%= venue.state %></td>
+        <td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= venue.id %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= venue.id %>/delete"><i class="fa fa-trash"></i></a></td></tr>
+        <% end %>
+        <% if @venues.empty? %>
+        <tr><td colspan="5">No data to list</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

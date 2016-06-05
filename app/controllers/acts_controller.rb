@@ -34,7 +34,8 @@ class ActsController < ApplicationController
   end
 
   def destroy
-    #code
+    @act.delete if @act
+    redirect_to acts_path
   end
 
   private

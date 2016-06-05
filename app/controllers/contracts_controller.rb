@@ -35,7 +35,8 @@ class ContractsController < ApplicationController
   end
 
   def destroy
-    #code
+    @contract.delete if @contract
+    redirect_to contracts_path
   end
 
   private

@@ -1,20 +1,20 @@
 Perf Name:<%= @contract.performance.name %><br>
+Performance Date: <%= @contract.performance.perf_date %><br>
 Venue: <%= @contract.performance.venue.name %><br>
 Act: <%= @contract.performance.act.name %><br>
 Submit Date: <%= @contract.submit_date %><br>
 Due Date: <%= @contract.due_date %><br>
 Status: <%= @contract.status %><br>
-description: <%= @contract.performance.description %><br>
-perf_date: <%= @contract.performance.perf_date %><br>
-perf_time: <%= @contract.performance.perf_time %><br>
+Contract Details:<br /><%= @contract.performance.description %><br>
 
 <h3>Documents</h3>
 <% @documents.each do |d| %>
 <p>
-  <%= link_to d.name, d.location %><br><%= d.description %>
+  <%= link_to d.name, contract_document_path(@contract, d) %><br><%= d.description %>
 </p>
 <% end %>
 
 <h3>Approvals</h3>
 <% @approvals.each do |a| %>
-<p><%= a.user.first_name %> <%= a.user.last_name %> - <%= a.user.role %> | Date Requested: <%= a.date_requested %> | Status: <%= a.status %><% if a.status != 'Approved' && current_user.try(:id) == a.user_id %> | <%= button_to "Submit Approval", approve_path(a.id) %><% end %></p><% end %>
+<p><%= a.user.first_name %> <%= a.user.last_name %> - <%= a.user.role %> | Date Requested: <%= a.date_requested %> | Status: <%= a.status %><% if a.status == 'pending' && current_user.try(:id) == a.user_id %> | <%= button_to "Submit Approval", approve_path(a.id) %><% end %>
+  <% if a.status == 'pending' && current_user.is_admin %> | <%= button_to "Cancel Approval", cancel_approval_path(a.id) %><% end %></p><% end %>

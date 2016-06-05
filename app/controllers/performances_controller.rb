@@ -33,7 +33,8 @@ class PerformancesController < ApplicationController
   end
 
   def destroy
-    #code
+    @performance.delete if @performance
+    redirect_to performances_path
   end
 
   private
