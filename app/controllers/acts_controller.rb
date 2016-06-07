@@ -1,12 +1,11 @@
 class ActsController < ApplicationController
   before_action :get_act, only: [:show, :edit, :update, :destroy]
-
   def new
-    @act = Act.new
+    authorize @act = Act.new
   end
 
   def create
-    @act = Act.new(act_params)
+    authorize @act = Act.new(act_params)
     if @act.save
       redirect_to @act
     else
@@ -30,7 +29,7 @@ class ActsController < ApplicationController
   end
 
   def index
-    @acts = policy_scope(Act)
+    authorize @acts = policy_scope(Act)
   end
 
   def destroy
@@ -40,7 +39,7 @@ class ActsController < ApplicationController
 
   private
   def get_act
-    @act = Act.find(params[:id])
+    authorize @act = Act.find(params[:id])
   end
 
   def act_params

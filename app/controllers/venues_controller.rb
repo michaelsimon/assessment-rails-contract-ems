@@ -2,11 +2,11 @@ class VenuesController < ApplicationController
   before_action :get_venue, only: [:show, :edit, :update, :destroy]
 
   def new
-    @venue = Venue.new
+    authorize @venue = Venue.new
   end
 
   def create
-    @venue = Venue.new(venue_params)
+    authorize @venue = Venue.new(venue_params)
     if @venue.save
       redirect_to @venue
     else
@@ -30,7 +30,7 @@ class VenuesController < ApplicationController
   end
 
   def index
-    @venues = policy_scope(Venue)
+    authorize @venues = policy_scope(Venue)
   end
 
   def destroy
@@ -40,7 +40,7 @@ class VenuesController < ApplicationController
 
   private
   def get_venue
-    @venue = Venue.find(params[:id])
+    authorize @venue = Venue.find(params[:id])
   end
 
   def venue_params

@@ -2,11 +2,11 @@ class PerformancesController < ApplicationController
   before_action :get_performance, only: [:show, :edit, :update, :destroy]
 
   def new
-    @performance = Performance.new
+    authorize @performance = Performance.new
   end
 
   def create
-    @performance = Performance.new(performance_params)
+    authorize @performance = Performance.new(performance_params)
     if @performance.save
       redirect_to @performance
     else
@@ -29,7 +29,7 @@ class PerformancesController < ApplicationController
   end
 
   def index
-    @performances = policy_scope(Performance)
+    authorize @performances = policy_scope(Performance)
   end
 
   def destroy
@@ -39,7 +39,7 @@ class PerformancesController < ApplicationController
 
   private
   def get_performance
-    @performance = Performance.find(params[:id])
+    authorize @performance = Performance.find(params[:id])
   end
 
   def performance_params
