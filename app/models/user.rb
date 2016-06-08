@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
-
    # Get the identity and user if they exist
    identity = Identity.find_for_oauth(auth)
    # If a signed_in_resource is provided it always overrides the existing user
@@ -26,8 +25,8 @@ class User < ActiveRecord::Base
      # Get the existing user by email if the provider gives us a verified email.
      # If no verified email was provided we assign a temporary email and ask the
      # user to verify it on the next step via UsersController.finish_signup
-     email_is_verified = (auth.extra.raw_info.email && auth.extra.raw_info.email_verified)
-     email = auth.info.email if email_is_verified
+    #  email_is_verified = (auth.extra.raw_info.email && auth.extra.raw_info.email_verified)
+     email = auth.info.email
      user = User.where(:email => email).first if email
 
      # Create the user if it's a new registration
