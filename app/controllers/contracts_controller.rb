@@ -2,11 +2,11 @@ class ContractsController < ApplicationController
   before_action :get_contract, only: [:show, :edit, :update, :destroy]
 
   def new
-    @contract = Contract.new
+    authorize @contract = Contract.new
   end
 
   def create
-    @contract = Contract.new(contract_params)
+    authorize @contract = Contract.new(contract_params)
     if @contract.save
       redirect_to @contract
     else
@@ -31,7 +31,7 @@ class ContractsController < ApplicationController
   end
 
   def index
-    @contracts = policy_scope(Contract)
+    authorize @contracts = policy_scope(Contract)
   end
 
   def destroy
@@ -41,7 +41,7 @@ class ContractsController < ApplicationController
 
   private
   def get_contract
-    @contract = Contract.find(params[:id])
+    authorize @contract = Contract.find(params[:id])
   end
 
   def contract_params
