@@ -22,7 +22,7 @@ class VenuePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.is_admin == true || user.super_admin? || user.agent?
+    user.is_admin == true || user.super_admin?
   end
 
   def edit?

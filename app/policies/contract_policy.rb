@@ -34,7 +34,6 @@ class ContractPolicy < ApplicationPolicy
   end
 
   def show?
-    # binding.pry
     user.is_admin == true || user.super_admin? || user.agent? || user.act? && user.act == record.performance.act || user.venue? && user.venue == record.performance.venue
   end
 

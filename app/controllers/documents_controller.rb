@@ -2,8 +2,8 @@ class DocumentsController < ApplicationController
   before_action :get_document, only: [:show, :edit, :update, :destroy]
 
   def new
-    @contract = Contract.find(params[:contract_id])
-    @document = Document.new
+    authorize @contract = Contract.find(params[:contract_id])
+    authorize @document = Document.new
   end
 
   def create
@@ -30,18 +30,17 @@ class DocumentsController < ApplicationController
     redirect_to @document.location
   end
 
-  def index
-    @contracts = Document.where(contract_id: params[:contract_id])
-  end
+  # def index
+  # end
 
   def destroy
-    @document.delete if @document
+    authorize @document.delete if @document
     redirect_to contract_path(@document.contract)
   end
 
   private
   def get_document
-    @document = Document.find(params[:id])
+    authorize @document = Document.find_by(id: params[:id], contract_id: params[:contract_id])
     @contract = @document.contract
   end
 

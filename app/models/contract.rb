@@ -9,7 +9,6 @@ class Contract < ActiveRecord::Base
       if !approval_attribute[:user_id].blank?
         approval = Approval.find_or_initialize_by(approval_attribute)
         approval.status = "pending" if !approval.persisted?
-        binding.pry
         approval.save
         self.approvals << approval
       end
