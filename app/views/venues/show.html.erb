@@ -9,6 +9,7 @@
   E-mail: <%= @venue.email %><br>
   Website: <%= @venue.website %><br>
 </p>
+<p><% if policy(:venue).edit? %><%= link_to 'Edit', edit_venue_path(@venue) %><% end %></p>
 
 Users:
 <% @users.each do |u| %>

@@ -9,4 +9,5 @@
 <p><strong>Description: </strong><br /><%= @performance.description  %></p>
 <p><strong>Ticketing: </strong><%= link_to @performance.tkts_url, @performance.tkts_url, target: 'blank'  %></p>
 <p><%= link_to 'View Contract', contract_path(@performance.contract) %></p>
+<p><% if policy(:performance).show? %><%= link_to 'Edit', edit_performance_path(@performance) %><% end %></p>
 </div>
