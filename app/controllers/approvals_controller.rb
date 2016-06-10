@@ -11,7 +11,7 @@ class ApprovalsController < ApplicationController
   end
 
   def cancel
-    if @approval && current_user.is_admin
+    if @approval && current_user.role = 'super_admin')
       @approval.mark_cancelled
       redirect_to contract_path(@approval.contract_id)
     else

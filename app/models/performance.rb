@@ -3,7 +3,7 @@ class Performance < ActiveRecord::Base
   belongs_to :venue
   has_one :contract
   validates_presence_of :act_id, :venue_id, :name, :description
-  validates :tkts_url, format: { with: URI.regexp } if tkts_url.present?
+  validates :tkts_url, format: { with: URI.regexp }
   validate :check_perf_date
 
   def check_perf_date

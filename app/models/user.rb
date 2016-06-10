@@ -2,12 +2,34 @@ class User < ActiveRecord::Base
   enum role: [:unassigned, :agent, :act, :venue, :super_admin]
   has_many :approvals
   has_one :identity
-  belongs_to :venue if :role => :venue
-  belongs_to :act if :role => :act
+  belongs_to :venue
+  belongs_to :act
   validates_presence_of :name, :email, :password
   validates_uniqueness_of :email
+  validate :user_venue_has_venue_id
+  validate :user_act_has_act_id
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
+
+  def user_venue_has_venue_id
+    if user.try(:role) == 'venue'
+      unless !user.venue_id.nil?
+        errors.add(:user, "Venue user does not have a venue associated.")
+      end
+    end
+  end
+
+  def is_admin
+    user.role == ('super_admin' || 'agent')
+
+  def user_venue_has_venue_id
+    if user.try(:role) == 'act'
+      unless !user.act_id.nil?
+        errors.add(:user, "Act user does not have an Act associated.")
+      end
+    end
+  end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 

@@ -13,7 +13,7 @@
 
 Users:
 <% @users.each do |u| %>
-<p><%= "#{u.first_name} #{u.last_name}" %><br>
+<p><%= u.name %><br>
   <%= u.title %><br>
   Phone: <%= tel_to(u.phone) %> | E-mail: <%= mail_to u.email %>
 </p>
