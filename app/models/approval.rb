@@ -2,6 +2,8 @@ class Approval < ActiveRecord::Base
   belongs_to :contract
   belongs_to :user
 
+  validates_presence_of :status
+  
   def mark_approved
     self.status = "approved"
     self.date_answered = Time.now

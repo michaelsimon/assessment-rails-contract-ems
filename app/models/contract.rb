@@ -3,6 +3,15 @@ class Contract < ActiveRecord::Base
   has_many :documents
   has_many :approvals
 
+  validates_presence_of :performance_id, :status, :details
+  validate :check_due_date
+
+  def check_due_date
+    if due_date > Date.today
+      errors.add(:contract, "Due Date cannot be in the past.")
+    end
+  end
+
   def approvals_attributes=(approval_attributes)
     approval_attributes.values.each do |approval_attribute|
 
