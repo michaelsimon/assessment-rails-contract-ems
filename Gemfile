@@ -14,6 +14,8 @@ gem 'pundit'
 gem 'omniauth-oauth2', '1.3.1'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-google-oauth2'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'byebug'
