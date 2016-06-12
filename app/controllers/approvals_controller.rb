@@ -19,6 +19,9 @@ class ApprovalsController < ApplicationController
     end
   end
 
+  def reject
+  end
+  
   def destroy
     @approval.delete if @approval
     redirect_to contract_path(@approval.contract)

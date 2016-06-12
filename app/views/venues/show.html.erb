@@ -1,25 +1,47 @@
+<div class="row">
+  <div class="panel panel-default col-sm-offset-1 col-sm-10">
+      <% if policy(:venue).edit? %>
+        <div style="float: right;"><%= link_to 'Edit', edit_venue_path(@venue) %><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', venue_path(@venue), method: :delete %><i class="fa fa-trash fa-lg"></i></a></div>
+      <% end %>
 <h1><%= @venue.name %></h1>
 <p>
-  Address:<br>
+  <strong>Address:</strong><br>
   <%= @venue.address %><br>
   <%= "#{@venue.city}, #{@venue.state}  #{@venue.zipcode}" %>
 </p>
 <p>
-  Phone: <%= @venue.phone %><br>
-  E-mail: <%= @venue.email %><br>
-  Website: <%= @venue.website %><br>
+  <strong>Phone: </strong><%= @venue.phone %><br>
+  <strong>E-mail: </strong><%= @venue.email %><br>
+  <strong>Website: </strong><%= @venue.website %><br>
 </p>
-<p><% if policy(:venue).edit? %><%= link_to 'Edit', edit_venue_path(@venue) %><% end %></p>
-
-Users:
-<% @users.each do |u| %>
-<p><%= u.name %><br>
-  <%= u.title %><br>
-  Phone: <%= tel_to(u.phone) %> | E-mail: <%= mail_to u.email %>
+<p>
+  &nbsp;
 </p>
-<% end %>
+<h4>Users:</h4>
+<div class="panel panel-default col-sm-10">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Phone</th>
+        <th>E-mail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |u| %>
+      <tr>
+        <td><%= u.name %></td>
+        <td><%= u.title %></td>
+        <td><%= u.phone %></td>
+        <td><%= mail_to u.email %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<div class="panel panel-default col-sm-offset-1 col-sm-10">
+<div class="panel panel-default col-sm-10">
   <div class="panel-heading"><strong>Upcoming Performances at <%= @venue.name %></strong></div>
   <table class="table">
     <thead>
@@ -27,21 +49,23 @@ Users:
         <th>Name</th>
         <th>Act</th>
         <th>Date</th>
+        <th>Contract</th>
       </tr>
     </thead>
     <tbody>
       <% @venue.performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
       <tr>
-        <td><%= perf.name %>  <a href="/performances/<%= perf.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
-        <td><%= perf.act.name %>  <a href="/acts/<%= perf.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
+        <td><%= perf.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
         <td><%= perf.fmatdate %></td>
+        <td><%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<div class="panel panel-default col-sm-offset-1 col-sm-10">
+<div class="panel panel-default col-sm-10">
   <div class="panel-heading"><strong>Past Performances</strong></div>
   <table class="table">
     <thead>
@@ -49,16 +73,20 @@ Users:
         <th>Name</th>
         <th>Act</th>
         <th>Date</th>
+        <th>Contract</th>
       </tr>
     </thead>
     <tbody>
       <% @venue.performances.order(perf_date: :desc).where('perf_date < ?', Date.today).each do |perf| %>
       <tr>
-        <td><%= perf.name %>  <a href="/performances/<%= perf.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
-        <td><%= perf.act.name %>  <a href="/acts/<%= perf.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
+        <td><%= perf.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
         <td><%= perf.fmatdate %></td>
+        <td><%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
+</div>
+</div>
 </div>
