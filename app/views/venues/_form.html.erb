@@ -1,20 +1,39 @@
-<%= form_for @venue do |f| %>
-  <%= render partial: "shared/errors", locals: {md: @venue} %>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "form-control" %><br>
-  <%= f.label :address %>
-  <%= f.text_field :address, class: "form-control" %><br>
-  <%= f.label :city %>
-  <%= f.text_field :city, class: "form-control" %><br>
-  <%= f.label :state %>
-  <%= f.text_field :state, class: "form-control" %><br>
-  <%= f.label :zipcode %>
-  <%= f.text_field :zipcode, class: "form-control" %><br>
-  <%= f.label :phone %>
-  <%= f.phone_field :phone, class: "form-control" %><br>
-  <%= f.label :email %>
-  <%= f.email_field :email, class: "form-control" %><br>
-  <%= f.label :website %>
-  <%= f.url_field :website, class: "form-control" %><br>
-  <%= f.submit %>
-<% end %>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-8"><h1><%= "#{params[:action].capitalize} #{params[:controller].singularize.capitalize}" %></h1></div>
+</div>
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <div class="panel-body">
+    <%= form_for @venue do |f| %>
+      <%= render partial: "shared/errors", locals: {md: @venue} %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %><br>
+      <%= f.label :address %>
+      <%= f.text_field :address, class: "form-control" %><br>
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "form-control" %><br>
+      <%= f.label :state %>
+      <%= f.text_field :state, class: "form-control" %><br>
+      <%= f.label :zipcode %>
+      <%= f.text_field :zipcode, class: "form-control" %><br>
+      <%= f.label :phone %>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('phone') %></span>
+        <%= f.phone_field :phone, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.label :email %>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('envelope') %></span>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.label :website %>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('globe') %></span>
+        <%= f.url_field :website, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,18 +1,45 @@
-<%= form_for @performance do |f| %>
-  <%= render partial: "shared/errors", locals: {md: @performance} %>
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "form-control" %><br>
-  <%= f.label :act_id %>
-  <%= f.collection_select(:act_id, Act.all, :id, :name, include_blank: 'Select')  %><br>
-  <%= f.label :venue_id %>
-  <%= f.collection_select(:venue_id, Venue.all, :id, :name, include_blank: 'Select')  %><br>
-  <%= f.label :description %>
-  <%= f.text_field :description, class: "form-control" %><br>
-  <%= f.label 'Performance Date' %>
-  <%= f.date_field :perf_date, class: "form-control" %><br>
-  <%= f.label 'Performance Time' %>
-  <%= f.time_field :perf_time, class: "form-control" %><br>
-  <%= f.label 'Ticketing Website' %>
-  <%= f.url_field :tkts_url, class: "form-control" %><br>
-  <%= f.submit %>
-<% end %>
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-8"><h1><%= "#{params[:action].capitalize} #{params[:controller].singularize.capitalize}" %></h1></div>
+</div>
+<div class="panel panel-default col-sm-offset-1 col-sm-10">
+  <div class="panel-body">
+    <%= form_for @performance do |f| %>
+      <%= render partial: "shared/errors", locals: {md: @performance} %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %><br>
+      <%= f.label :act_id %><br />
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('star') %></span>
+        <%= f.collection_select(:act_id, Act.all, :id, :name, {include_blank: 'Select'}, {class: "form-control"} )  %>
+      </div>
+      <br>
+      <%= f.label :venue_id %><br />
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('map-marker') %></span>
+        <%= f.collection_select(:venue_id, Venue.all, :id, :name, {include_blank: 'Select'}, {class: "form-control"} )  %>
+      </div>
+      <br>
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control", rows: 3 %><br>
+      <%= f.label 'Performance Date' %>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('calendar') %></span>
+        <%= f.date_field :perf_date, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.label 'Performance Time' %>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('clock-o') %></span>
+        <%= f.time_field :perf_time, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.label 'Ticketing Website' %>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><%= icon('globe') %></span>
+        <%= f.url_field :tkts_url, class: "form-control" %>
+      </div>
+      <br>
+      <%= f.submit class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
