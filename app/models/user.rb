@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable
 
   def user_venue_has_venue_id
-    if user.try(:role) == 'venue'
+    if self.try(:role) == 'venue'
       unless !user.venue_id.nil?
         errors.add(:user, "Venue user does not have a venue associated.")
       end
@@ -20,10 +20,11 @@ class User < ActiveRecord::Base
   end
 
   def is_admin
-    user.role == ('super_admin' || 'agent')
+    role == ('super_admin' || 'agent')
+  end
 
   def user_venue_has_venue_id
-    if user.try(:role) == 'act'
+    if self.try(:role) == 'act'
       unless !user.act_id.nil?
         errors.add(:user, "Act user does not have an Act associated.")
       end
