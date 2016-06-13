@@ -19,10 +19,10 @@
       <% @performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
       <tr>
         <td class="col-md-2"><%= perf.name %></td>
-        <td><%= perf.act.name %>  <a href="/acts/<%= perf.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
-        <td><%= perf.venue.name %>  <a href="/venues/<%= perf.venue.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+        <td><%= perf.act.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe, act_path(perf.act) %></td>
+        <td><%= perf.venue.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe, venue_path(perf.venue) %></td>
         <td><%= perf.fmatdate %></td><td><%= perf.fmattime %></td>
-        <td><a href="/performances/<%= perf.id %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/performances/<%= perf.id %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/performances/<%= perf.id %>/delete"><i class="fa fa-trash"></i></a></td>
+        <td><%= link_to "#{icon('eye')}".html_safe, performance_path(perf) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_performance_path(perf) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, performance_path(perf), method: :delete %></td>
       </tr>
       <% end %>
     </tbody>
@@ -44,11 +44,13 @@
     </thead>
     <tbody>
       <% @performances.order(perf_date: :desc).where('perf_date < ?', Date.today).each do |perf| %>
-      <tr><td><%= perf.name %></td>
-        <td><%= perf.act.name %>  <a href="/acts/<%= perf.act.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
-        <td><%= perf.venue.name %>  <a href="/venues/<%= perf.venue.id %>"><i class="fa fa-arrow-circle-right"></i></a></td>
+      <tr>
+        <td class="col-md-2"><%= perf.name %></td>
+        <td><%= perf.act.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
+        <td><%= perf.venue.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , venue_path(perf.venue) %></td>
         <td><%= perf.fmatdate %></td><td><%= perf.fmattime %></td>
-<td><a href="/performances/<%= perf.id %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/performances/<%= perf.id %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/performances/<%= perf.id %>/delete"><i class="fa fa-trash"></i></a></td></tr>
+        <td><%= link_to "#{icon('eye')}".html_safe, performance_path(perf) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_performance_path(perf) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, performance_path(perf), method: :delete %></td>
+      </tr>
         <% end %>
       </tbody>
     </table>

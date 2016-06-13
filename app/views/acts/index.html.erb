@@ -16,7 +16,9 @@
    <tbody>
      <% @acts.each do |act| %>
      <tr><td class="col-md-2"><%= act.name %></td><td  class="col-md-3"><%= act.description %></td><td  class="col-md-1"><%= act.size %></td>
-       <td  class="col-md-2"><%= act.location %></td><td  class="col-md-2"><%= link_to act.website, act.website %></td><td>links</td></tr>
+       <td  class="col-md-2"><%= act.location %></td><td  class="col-md-2"><%= link_to act.website, act.website %></td>
+       <td><%= link_to "#{icon('eye')}".html_safe, act_path(act) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_act_path(act) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, act_path(act), method: :delete %></td>
+     </tr>
        <% end %>
        <% if @acts.empty? %>
        <tr><td colspan="5">No data to list</td></tr>

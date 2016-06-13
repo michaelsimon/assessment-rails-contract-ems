@@ -17,7 +17,8 @@
     <tbody>
       <% @venues.each do |venue| %>
       <tr><td class="col-md-2"><%= venue.name %></td><td><%= venue.city %>, <%= venue.state %></td>
-        <td><%= venue.phone %></td><td><%= venue.email %></td><td><%= venue.website %></td><td><a href="/venues/<%= venue.id %>"><i class="fa fa-info-circle"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= venue.id %>/edit"><i class="fa fa-pencil-square"></i></a>&nbsp;&nbsp;&nbsp;<a href="/venues/<%= venue.id %>/delete"><i class="fa fa-trash"></i></a></td></tr>
+        <td><%= venue.phone %></td><td><%= mail_to venue.email, venue.email %></td><td><%= link_to venue.website, venue.website %></td>
+        <td><%= link_to "#{icon('eye')}".html_safe, venue_path(venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_venue_path(venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, venue_path(venue), method: :delete %></td></tr>
         <% end %>
         <% if @venues.empty? %>
         <tr><td colspan="5">No data to list</td></tr>
