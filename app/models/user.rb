@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validate :user_venue_has_venue_id
   validate :user_act_has_act_id
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
 
@@ -23,7 +25,7 @@ class User < ActiveRecord::Base
     role == ('super_admin' || 'agent')
   end
 
-  def user_venue_has_venue_id
+  def user_act_has_act_id
     if self.try(:role) == 'act'
       unless !user.act_id.nil?
         errors.add(:user, "Act user does not have an Act associated.")
@@ -31,8 +33,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
    # Get the identity and user if they exist
