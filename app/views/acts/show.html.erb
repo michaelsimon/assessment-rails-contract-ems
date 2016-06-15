@@ -31,7 +31,11 @@
           <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
           <td><%= perf.venue.name %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, venue_path(perf.venue) %></td>
           <td><%= perf.fmatdate %></td>
-          <td><%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %></td>
+          <td>
+          <% if perf.try(:contract) %>
+            <%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %>
+          <% end %>
+          </td>
         </tr>
         <% end %>
       </tbody>
@@ -55,7 +59,11 @@
           <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
           <td><%= perf.venue.name %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, venue_path(perf.venue) %></td>
           <td><%= perf.fmatdate %></td>
-          <td><%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %></td>
+          <td>
+          <% if perf.try(:contract) %>
+          <%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %>
+          <% end %>
+        </td>
         </tr>
         <% end %>
       </tbody>

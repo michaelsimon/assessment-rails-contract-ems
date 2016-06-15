@@ -7,7 +7,7 @@ class Contract < ActiveRecord::Base
   validate :check_due_date
 
   def check_due_date
-    if due_date > Date.today
+    if due_date < Date.today
       errors.add(:contract, "Due Date cannot be in the past.")
     end
   end
