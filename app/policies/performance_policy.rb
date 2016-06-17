@@ -14,11 +14,11 @@ class PerformancePolicy < ApplicationPolicy
   end
 
   def new?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def create?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def destroy?
@@ -26,15 +26,15 @@ class PerformancePolicy < ApplicationPolicy
   end
 
   def edit?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def update?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def show?
-    user.super_admin? || user.agent? || user.act? && user.act == record.act || user.venue? && user.venue == record.venue
+    user.is_admin || (user.act? && user.act == record.act) || (user.venue? && user.venue == record.venue)
   end
 
   def index?

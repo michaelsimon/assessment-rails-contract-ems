@@ -14,27 +14,27 @@ class ContractPolicy < ApplicationPolicy
   end
 
   def new?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def create?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def destroy?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def edit?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def update?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def show?
-    user.super_admin? || user.agent? || user.act? && user.act == record.performance.act || user.venue? && user.venue == record.performance.venue
+    user.is_admin || (user.act? && user.act == record.performance.act) || (user.venue? && user.venue == record.performance.venue)
   end
 
   def index?

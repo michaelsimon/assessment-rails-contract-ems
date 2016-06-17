@@ -4,36 +4,46 @@ class User < ActiveRecord::Base
   has_one :identity
   belongs_to :venue
   belongs_to :act
-  validates_presence_of :name, :email, :password
+  validates_presence_of :name, :email
+  validates_presence_of :password, on: :create
   validates_uniqueness_of :email
   validate :user_venue_has_venue_id
   validate :user_act_has_act_id
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   def user_venue_has_venue_id
     if self.try(:role) == 'venue'
-      unless !user.venue_id.nil?
+      unless !venue_id.nil?
         errors.add(:user, "Venue user does not have a venue associated.")
       end
     end
   end
 
-  def is_admin
-    role == ('super_admin' || 'agent')
-  end
-
   def user_act_has_act_id
     if self.try(:role) == 'act'
-      unless !user.act_id.nil?
+      unless !act_id.nil?
         errors.add(:user, "Act user does not have an Act associated.")
       end
     end
   end
 
+  def is_admin
+    role == "super_admin" || role == "agent"
+  end
 
+  def change_user_status(user, status, role, org)
+    if current_user.is_admin
+      update_user = User.find(user)
+      update_user.status = status
+      update_user.role = role
+      if role == 2
+        update_user.act_id = org
+      elsif role == 3
+        update_user.venue_id = org
+      end
+      update_user.save
+    end
+end
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
    # Get the identity and user if they exist

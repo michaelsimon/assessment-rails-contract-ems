@@ -14,11 +14,11 @@ class ActPolicy < ApplicationPolicy
   end
 
   def new?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def create?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def destroy?
@@ -26,15 +26,15 @@ class ActPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.super_admin? || user.agent? || user.act? && user.act == record
+    user.is_admin || (user.act? && user.act == record)
   end
 
   def update?
-    user.super_admin? || user.agent? || user.act? && user.act == record
+    user.is_admin || (user.act? && user.act == record)
   end
 
   def show?
-    user.super_admin? || user.agent? || user.act? && user.act == record || user.venue? && record.performances.map {|r| r.venue_id}.include?(user.venue_id)
+    user.is_admin || (user.act? && user.act == record) || (user.venue? && record.performances.map {|r| r.venue_id}.include?(user.venue_id))
   end
 
   def index?

@@ -1,10 +1,14 @@
 class ApprovalPolicy < ApplicationPolicy
   def approve?
-    user.super_admin? || user.agent? || user.venue? && user.venue_id == record.contract.performance.venue_id || user.act? && user.act_id == record.contract.performance.act_id
+    user.is_admin || (user.venue? && user.venue_id == record.contract.performance.venue_id) || (user.act? && user.act_id == record.contract.performance.act_id)
+  end
+
+  def reject?
+    user.is_admin || (user.venue? && user.venue_id == record.contract.performance.venue_id) || (user.act? && user.act_id == record.contract.performance.act_id)
   end
 
   def cancel?
-    user.super_admin? || user.agent?
+    user.is_admin
   end
 
   def destroy?
