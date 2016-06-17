@@ -7,10 +7,11 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.new(document_params)
+    authorize @document = Document.new(document_params)
     if @document.save
       redirect_to contract_path(@document.contract_id)
     else
+      @contract = Contract.find(params[:contract_id])
       render 'new'
     end
   end

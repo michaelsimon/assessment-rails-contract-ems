@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :acts
-  resources :approvals
   resources :contracts do
     resources :documents
   end
