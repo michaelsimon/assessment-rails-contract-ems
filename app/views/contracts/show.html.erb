@@ -1,7 +1,8 @@
 <div class="row">
+  <br />
   <div class="panel panel-default col-sm-offset-1 col-sm-10">
     <% if policy(:venue).edit? %>
-    <div style="float: right;"><%= link_to 'Edit', edit_contract_path(@contract) %><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', contract_path(@contract), method: :delete %><i class="fa fa-trash fa-lg"></i></a></div>
+    <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_path(@contract) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_path(@contract), method: :delete %></div>
     <% end %>
     <h1><%= @contract.performance.name %></h1>
     <p>
@@ -18,7 +19,7 @@
       <strong>Contract Details: </strong><br /><%= @contract.performance.description %>
     </p>
     <h3>Documents</h3>
-    <% if policy(:document).new? %><p><%= link_to 'New Document', new_contract_document_path(@contract)%></p><% end %>
+    <% if policy(:document).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, new_contract_document_path(@contract)%></p><% end %>
     <div class="panel panel-default col-sm-11">
       <table class="table">
         <thead>
@@ -33,7 +34,7 @@
           <tr>
             <td><%= link_to doc.name, contract_document_path(@contract, doc) %></td>
             <td><%= doc.description %></td>
-            <td><% if policy(:document).edit? %><%= link_to 'Edit', edit_contract_document_path(@contract, doc) %><% end %></td>
+            <td><% if policy(:document).edit? %><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_document_path(@contract, doc) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_document_path(@contract, doc), method: :delete %><% end %></td>
           </tr>
           <% end %>
         </tbody>
@@ -83,6 +84,6 @@
             <% end %>
           </tbody>
         </table>
-      </div>  
+      </div>
     </div>
   </div>

@@ -7,9 +7,10 @@
     <%= form_for @contract do |f| %>
       <%= render partial: "shared/errors", locals: {md: @contract} %>
       <h3>Contract Details</h3>
-      <%= f.label :performance %>
-
-      <%= f.collection_select(:performance_id, Performance.all, :id, :performance_string, {include_blank: 'Select'}, {class: 'form-control'})  %><br>
+      <%= f.label :performance %><br />
+      <%= Performance.find_by(id: (params[:performance_id] || f.object.performance_id)).try(:performance_string) %>
+      <%= f.hidden_field :performance_id, {:value => (f.object.performance_id || params[:performance_id])} %>
+      <br>
       <%= f.label :submit_date %>
       <%= f.date_field :submit_date, class: "form-control" %><br>
       <%= f.label :due_date %>

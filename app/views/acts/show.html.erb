@@ -1,7 +1,8 @@
 <div class="row">
+  <br />
   <div class="panel panel-default col-sm-offset-1 col-sm-10">
       <% if policy(:act).edit? %>
-        <div style="float: right;"><%= link_to 'Edit', edit_act_path(@act) %><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', act_path(@act), method: :delete %><i class="fa fa-trash fa-lg"></i></a></div>
+        <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_act_path(@act) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, act_path(@act), method: :delete %></div>
       <% end %>
   <h1><%= @act.name %></h1>
   <p><strong>Description:</strong><br />

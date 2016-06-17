@@ -1,7 +1,8 @@
 <div class="row">
+  <br />
 <div class="panel panel-default col-sm-offset-1 col-sm-10">
     <% if policy(:performance).edit? %>
-      <div style="float: right;"><%= link_to 'Edit', edit_performance_path(@performance) %><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', act_path(@performance), method: :delete %><i class="fa fa-trash fa-lg"></i></a></div>
+      <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_performance_path(@performance) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, act_path(@performance), method: :delete %></div>
     <% end %>
 <h1><%= @performance.name %></h1>
 
@@ -9,7 +10,7 @@
 <% if @performance.try(:contract) %>
 <%= link_to 'View Contract', contract_path(@performance.contract) %>
 <% else %>
-<%= link_to 'Create Contract', new_contract_path %>
+<%= link_to 'Create Contract', new_contract_path(:performance_id => @performance.id) %>
 <% end %>
 </p>
 <p><strong>Date: </strong><%= @performance.fmatdate %> | <strong>Time: </strong><%= @performance.fmattime %></p>

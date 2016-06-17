@@ -1,7 +1,8 @@
 <div class="row">
+  <br />
   <div class="panel panel-default col-sm-offset-1 col-sm-10">
       <% if policy(:venue).edit? %>
-        <div style="float: right;"><%= link_to 'Edit', edit_venue_path(@venue) %><i class="fa fa-pencil-square fa-lg"></i></a>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete', venue_path(@venue), method: :delete %><i class="fa fa-trash fa-lg"></i></a></div>
+        <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_venue_path(@venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, venue_path(@venue), method: :delete %></div>
       <% end %>
 <h1><%= @venue.name %></h1>
 <p>
@@ -53,7 +54,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @venue.performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
+      <% @performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
       <tr>
         <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
         <td><%= perf.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
@@ -81,7 +82,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @venue.performances.order(perf_date: :desc).where('perf_date < ?', Date.today).each do |perf| %>
+      <% @performances.order(perf_date: :desc).where('perf_date < ?', Date.today).each do |perf| %>
       <tr>
         <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
         <td><%= perf.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
