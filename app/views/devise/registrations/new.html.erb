@@ -11,7 +11,7 @@
       <span class="input-group-addon" id="basic-addon1"><%= icon('user') %></span>
       <%= f.text_field :name, autofocus: true, class:'form-control' %>
     </div>
-    <%= f.label :title %><br />
+    <%= f.label 'Organization/Title' %><br />
     <div class="field input-group">
       <span class="input-group-addon" id="basic-addon1"><%= icon('building-o') %></span>
       <%= f.text_field :title, class:'form-control' %>
@@ -49,4 +49,3 @@
     <% end %>
   </div>
 </div>
-<% render "devise/shared/links" %>
