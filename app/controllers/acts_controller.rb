@@ -25,7 +25,8 @@ class ActsController < ApplicationController
   end
 
   def show
-    @performances = @act.performances
+    # @performances = @act.performances
+    @performances = policy_scope(Performance)
   end
 
   def index

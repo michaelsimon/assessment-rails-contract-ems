@@ -27,6 +27,7 @@ class VenuesController < ApplicationController
 
   def show
     @users = @venue.users
+    @performances = policy_scope(Performance)
   end
 
   def index
