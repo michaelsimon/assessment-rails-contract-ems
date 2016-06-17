@@ -3,7 +3,7 @@ class Approval < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :status
-  
+
   def mark_approved
     self.status = "approved"
     self.date_answered = Time.now
@@ -16,4 +16,10 @@ class Approval < ActiveRecord::Base
     self.save
   end
 
+  def mark_rejected
+    self.status = "rejected"
+    self.date_answered = Time.now
+    self.save
+  end
+  
 end
