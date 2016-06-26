@@ -5,11 +5,15 @@ Rails.application.routes.draw do
     resources :documents
   end
   resources :performances
-  # resources :users
+  scope 'admin' do
+    resources :users, only: [:index, :edit, :update, :destroy]
+  end
+
   resources :venues
+
   post 'approvals/:id/approve' => 'approvals#approve', as: :contract_apvl_approve
   post 'approvals/:id/reject' => 'approvals#reject', as: :contract_apvl_reject
   post 'approvals/:id/cancel' => 'approvals#cancel', as: :contract_apvl_cancel
-
+  # get  'admin/users/:id/edit' => 'users#edit'
   root 'general#welcome'
 end

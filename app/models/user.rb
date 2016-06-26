@@ -31,19 +31,20 @@ class User < ActiveRecord::Base
     role == "super_admin" || role == "agent"
   end
 
-  def change_user_status(user, status, role, org)
-    if current_user.is_admin
-      update_user = User.find(user)
-      update_user.status = status
-      update_user.role = role
-      if role == 2
-        update_user.act_id = org
-      elsif role == 3
-        update_user.venue_id = org
-      end
-      update_user.save
-    end
-end
+
+#   def change_user_properties(user, status, role, org)
+#     if current_user.is_admin
+#       update_user = User.find(user)
+#       update_user.status = status
+#       update_user.role = role
+#       if role == 2
+#         update_user.act_id = org
+#       elsif role == 3
+#         update_user.venue_id = org
+#       end
+#       update_user.save
+#     end
+# end
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
    # Get the identity and user if they exist

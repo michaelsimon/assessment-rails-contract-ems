@@ -1,31 +1,31 @@
 class UsersController < ApplicationController
-
-  def new
-    #code
-  end
-
-  def create
-    #code
+  before_action :get_user, only: [:edit, :update, :destroy]
+  def index
+    @users = User.all
   end
 
   def edit
-    #code
   end
 
   def update
-    #code
-  end
-
-  def show
-    #code
-  end
-
-  def index
-    #code
+    if @user.update(user_params)
+      redirect_to users_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    #code
+    @user.delete if @user
+    redirect_to users_path
   end
 
+  private
+  def get_user
+    authorize @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :role, :act_id, :venue_id, :approved)
+  end
 end

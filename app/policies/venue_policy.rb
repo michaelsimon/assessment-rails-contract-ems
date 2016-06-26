@@ -6,7 +6,7 @@ class VenuePolicy < ApplicationPolicy
       elsif user.try(:venue?)
         scope.where(id: user.venue_id)
       elsif user.try(:act?)
-        scope.joins(:performances).where("performances.act_id = ?", user.act_id)
+        scope.joins(:performances).where("performances.act_id = ?", user.act_id).distinct
       else
         scope.none
       end

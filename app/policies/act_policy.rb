@@ -4,7 +4,7 @@ class ActPolicy < ApplicationPolicy
       if user.try(:super_admin?) || user.try(:agent?)
         scope.all
       elsif user.try(:venue?)
-        scope.where("performances.venue_id = ?", user.venue_id)
+        scope.joins(:performances).where("performances.venue_id = ?", user.venue_id).distinct
       elsif user.try(:act?)
         scope.where(id: user.act_id)
       else
