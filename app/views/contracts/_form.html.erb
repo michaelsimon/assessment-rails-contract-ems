@@ -16,7 +16,7 @@
       <%= f.label :due_date %>
       <%= f.date_field :due_date, class: "form-control" %><br>
       <%= f.label :status %><br />
-      <%= f.select :status, options_for_select([["Pending", "pend"], ["Submitted", "submit"], ["Approved", "a"], ["Fulfilled", "f"], ["Canceled", "c"]]),{}, {class: 'form-control'} %><br>
+      <%= f.select :status, options_for_contract_status,{}, {class: 'form-control'} %><br>
       <%= f.label :details %><br>
       <%= f.text_area :details, class: "form-control", rows: 3 %>
       <h3>Add Approvers</h3>

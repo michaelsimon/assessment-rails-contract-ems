@@ -12,6 +12,20 @@ class Contract < ActiveRecord::Base
     end
   end
 
+  def status_value
+    if status == "pend"
+      "Pending"
+    elsif status == "submit"
+      "Submitted"
+    elsif status =="app"
+       "Approved"
+     elsif status == "ff"
+       "Fulfilled"
+     elsif status == "cancel"
+       "Cancelled"
+    end
+  end
+
   def approvals_attributes=(approval_attributes)
     approval_attributes.values.each do |approval_attribute|
 
