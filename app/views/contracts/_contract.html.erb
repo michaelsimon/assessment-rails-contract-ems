@@ -1,0 +1,8 @@
+<tr>
+  <td class="col-md-2"><%= contract.performance.name %></td>
+  <td><%= contract.performance.act.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe, act_path(contract.performance.act) %></td>
+  <td><%= contract.performance.venue.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe, venue_path(contract.performance.venue) %></td>
+  <td><%= fmatdate(contract.performance.perf_date) %></td><td><%= contract.status %></td>
+  <td><%= link_to "#{icon('eye')}".html_safe, contract_path(contract) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_contract_path(contract) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, contract_path(contract), method: :delete %>
+  </td>
+</tr>

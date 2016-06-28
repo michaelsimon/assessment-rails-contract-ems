@@ -1,0 +1,26 @@
+<tr>
+  <td><%= approval.user.name %></td>
+  <td><%= approval.user.role %></td>
+  <td><%= approval.date_requested %></td>
+  <td><%= approval.status %></td>
+  <td>
+    <% if approval.status == 'pending' && current_user.try(:id) == approval.user_id %>
+    <div style="float: left; padding-left:10px;">
+      <%= button_to contract_apvl_approve_path(approval), class:"btn btn-success btn-sm" do %>
+      <strong><%= icon('check') %> Approve</strong>
+      <% end %>
+    </div>
+    <div style="float: left; padding-left:10px;">
+      <%= button_to contract_apvl_reject_path(approval), class:"btn btn-danger btn-sm" do %>
+      <strong><%= icon('times') %> Reject</strong>
+      <% end %></div>
+      <% end %>
+      <% if approval.status == 'pending' && current_user.is_admin %>
+      <div style="float: left; padding-left:10px;">
+        <%= button_to contract_apvl_cancel_path(approval), class:"btn btn-warning btn-sm" do %>
+        <strong><%= icon('ban') %> Cancel Approval Request</strong>
+        <% end %>
+      </div>
+      <% end %>
+    </td>
+  </tr>

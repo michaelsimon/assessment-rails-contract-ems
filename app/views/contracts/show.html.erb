@@ -1,89 +1,50 @@
-<div class="row">
-  <br />
-  <div class="panel panel-default col-sm-offset-1 col-sm-10">
-    <% if policy(:venue).edit? %>
-    <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_path(@contract) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_path(@contract), method: :delete %></div>
-    <% end %>
-    <h1><%= @contract.performance.name %></h1>
-    <p>
-      <strong>Date: </strong><%= @contract.performance.fmatdate %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(@contract.performance) %><br>
-      <strong>Venue: </strong><%= @contract.performance.venue.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , venue_path(@contract.performance.venue) %><br>
-      <strong>Act: </strong><%= @contract.performance.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(@contract.performance.act) %>
-    </p>
-    <p>
-      <strong>Submit Date: </strong><%= @contract.submit_date %><br>
-      <strong>Due Date: </strong><%= @contract.due_date %><br>
-      <strong>Status: </strong><%= @contract.status_value %>
-    </p>
-    <p>
-      <strong>Contract Details: </strong><br /><%= @contract.performance.description %>
-    </p>
-    <h3>Documents</h3>
-    <% if policy(:document).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, new_contract_document_path(@contract)%></p><% end %>
-    <div class="panel panel-default col-sm-11">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Document</th>
-            <th>Description</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @documents.each do |doc| %>
-          <tr>
-            <td><%= link_to doc.name, contract_document_path(@contract, doc) %></td>
-            <td><%= doc.description %></td>
-            <td><% if policy(:document).edit? %><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_document_path(@contract, doc) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_document_path(@contract, doc), method: :delete %><% end %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <h3>Approvals</h3>
-    <div class="panel panel-default col-sm-11">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Representative</th>
-            <th>Role</th>
-            <th>Date Requested</th>
-            <th>Status</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @approvals.each do |apvl| %>
-          <tr>
-            <td><%= apvl.user.name %></td>
-            <td><%= apvl.user.role %></td>
-            <td><%= apvl.date_requested %></td>
-            <td><%= apvl.status %></td>
-            <td>
-
-              <% if apvl.status == 'pending' && current_user.try(:id) == apvl.user_id %>
-              <div style="float: left; padding-left:10px;">
-                <%= button_to contract_apvl_approve_path(apvl), class:"btn btn-success btn-sm" do %>
-                <strong><%= icon('check') %> Approve</strong>
-                <% end %>
-              </div>
-              <div style="float: left; padding-left:10px;">
-                <%= button_to contract_apvl_reject_path(apvl), class:"btn btn-danger btn-sm" do %>
-                <strong><%= icon('times') %> Reject</strong>
-                <% end %></div>
-                <% end %>
-                <% if apvl.status == 'pending' && current_user.is_admin %>
-                <div style="float: left; padding-left:10px;">
-                  <%= button_to contract_apvl_cancel_path(apvl), class:"btn btn-warning btn-sm" do %>
-                  <strong><%= icon('ban') %> Cancel Approval Request</strong>
-                  <% end %>
-                </div>
-                <% end %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<% if policy(:venue).edit? %>
+<div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_path(@contract) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_path(@contract), method: :delete %></div>
+<% end %>
+<h1><%= @contract.performance.name %></h1>
+<p>
+  <strong>Date: </strong><%= fmatdate(@contract.performance.perf_date) %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(@contract.performance) %><br>
+  <strong>Venue: </strong><%= @contract.performance.venue.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , venue_path(@contract.performance.venue) %><br>
+  <strong>Act: </strong><%= @contract.performance.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(@contract.performance.act) %>
+</p>
+<p>
+  <strong>Submit Date: </strong><%= fmatdate(@contract.submit_date) %><br>
+  <strong>Due Date: </strong><%= fmatdate(@contract.due_date) %><br>
+  <strong>Status: </strong><%= @contract.status_value %>
+</p>
+<p>
+  <strong>Contract Details: </strong><br /><%= @contract.performance.description %>
+</p>
+<h3>Documents</h3>
+<% if policy(:document).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, new_contract_document_path(@contract)%></p><% end %>
+<div class="panel panel-default col-sm-11">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Document</th>
+        <th>Description</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "document", collection: @documents %>
+    </tbody>
+  </table>
+</div>
+<h3>Approvals</h3>
+<div class="panel panel-default col-sm-11">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Representative</th>
+        <th>Role</th>
+        <th>Date Requested</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "approval", collection: @approvals %>
+    </tbody>
+  </table>
+</div>
