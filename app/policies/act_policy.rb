@@ -1,7 +1,7 @@
 class ActPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.try(:super_admin?) || user.try(:agent?)
+      if user.is_admin
         scope.all
       elsif user.try(:venue?)
         scope.joins(:performances).where("performances.venue_id = ?", user.venue_id).distinct

@@ -8,7 +8,7 @@ class DocumentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.is_admin
+    user.super_admin?
   end
 
   def edit?

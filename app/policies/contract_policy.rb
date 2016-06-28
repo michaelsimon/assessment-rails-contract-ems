@@ -1,7 +1,7 @@
 class ContractPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.try(:super_admin?) || user.try(:agent?)
+      if user.is_admin
         scope.all
       elsif user.try(:venue?)
         scope.joins(:performance).where("performances.venue_id = ?", user.venue_id)
@@ -22,7 +22,7 @@ class ContractPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.is_admin
+    user.super_admin?
   end
 
   def edit?
