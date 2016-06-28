@@ -1,6 +1,4 @@
-<div class="row">
-  <br />
-<div class="panel panel-default col-sm-offset-1 col-sm-10">
+
     <% if policy(:performance).edit? %>
       <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_performance_path(@performance) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, act_path(@performance), method: :delete %></div>
     <% end %>
@@ -13,10 +11,8 @@
 <%= link_to 'Create Contract', new_contract_path(:performance_id => @performance.id) %>
 <% end %>
 </p>
-<p><strong>Date: </strong><%= @performance.fmatdate %> | <strong>Time: </strong><%= @performance.fmattime %></p>
+<p><strong>Date: </strong><%= fmatdate(@performance.perf_date) %> | <strong>Time: </strong><%= fmattime(@performance.perf_time) %></p>
 <p><strong>Act: </strong><%= link_to @performance.act.name, act_path(@performance.act)  %></p>
 <p><strong>Venue: </strong><%= link_to @performance.venue.name, venue_path(@performance.venue)  %></p>
 <p><strong>Description: </strong><br /><%= @performance.description  %></p>
 <p><strong>Ticketing: </strong><%= link_to @performance.tkts_url, @performance.tkts_url, target: 'blank'  %></p>
-</div>
-</div>
