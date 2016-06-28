@@ -10,15 +10,15 @@
       </button>
       <%= link_to root_path, class: 'navbar-brand' do %><strong>ems</strong><% end %>
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <!-- Navigation Links -->
+    <div class="collapse navbar-collapse">
       <% if current_user %>
       <ul class="nav navbar-nav">
         <li class="dropdown <%= 'active' if @path.include?("performances") %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('music') %> Performances<span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <% if policy(:performance).index? %><li><%= link_to 'List All My Performances', performances_path %></li><% end %>
-              <% if policy(:performance).new? %><li><%= link_to 'Add Performance', new_performance_path %></li><% end %>
+            <% if policy(:performance).index? %><li><%= link_to 'List All My Performances', performances_path %></li><% end %>
+            <% if policy(:performance).new? %><li><%= link_to 'Add Performance', new_performance_path %></li><% end %>
           </ul>
         </li>
         <li class="dropdown <%= 'active' if @path == "contracts" %>">
@@ -43,6 +43,7 @@
             <% if policy(:venue).new? %><li><%= link_to 'Add Venue', new_venue_path %></li><% end %>
           </ul>
         </li>
+        <% if policy(:user).edit? %><li class="<%= 'active' if @path.include?("users") %>"><%= link_to "#{icon('users')} Modify Users".html_safe, users_path %></li><% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown <%= 'active' if @path == "users" %>">

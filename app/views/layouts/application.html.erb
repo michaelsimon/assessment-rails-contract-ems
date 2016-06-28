@@ -45,11 +45,20 @@
       </div>
       <% end %>
       <div class="row">
-        <div class="col-sm-12"><%= yield %></div></div>
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-offset-1 col-sm-8"><h1><%= "#{params[:controller].capitalize}" %></h1></div>
+          </div>
+          <div class="panel panel-default col-sm-offset-1 col-sm-10">
+            <%= yield %>
+            <br />
+          </div>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12">&nbsp;</div>
-      </div>
-      <%= console %>
-    </body>
-    </html>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">&nbsp;</div>
+    </div>
+    <%= console %>
+  </body>
+  </html>
