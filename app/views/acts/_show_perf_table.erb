@@ -1,0 +1,16 @@
+  <div class="panel-heading">
+    <strong><%= title %></strong>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Venue</th>
+        <th>Date</th>
+        <th>Contract</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "performance", collection: (collection) %>
+    </tbody>
+  </table>

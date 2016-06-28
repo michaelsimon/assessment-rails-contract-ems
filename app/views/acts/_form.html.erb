@@ -1,7 +1,3 @@
-<div class="row">
-  <div class="col-sm-offset-1 col-sm-8"><h1><%= "#{params[:action].capitalize} #{params[:controller].singularize.capitalize}" %></h1></div>
-</div>
-<div class="panel panel-default col-sm-offset-1 col-sm-10">
   <div class="panel-body">
     <%= form_for @act do |f| %>
       <%= render partial: "shared/errors", locals: {md: @act} %>
@@ -22,4 +18,3 @@
       <%= f.submit class: "btn btn-primary" %>
     <% end %>
   </div>
-</div>
