@@ -29,7 +29,8 @@ class PerformancesController < ApplicationController
   end
 
   def index
-    authorize @performances = policy_scope(Performance)
+    authorize @performances_upcoming = policy_scope(Performance).order(perf_date: :asc).where('perf_date >= ?', Date.today)
+    authorize @performances_past = policy_scope(Performance).order(perf_date: :asc).where('perf_date < ?', Date.today)
   end
 
   def destroy

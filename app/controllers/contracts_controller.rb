@@ -31,7 +31,7 @@ class ContractsController < ApplicationController
   end
 
   def index
-    authorize @contracts = policy_scope(Contract)
+    authorize @contracts = policy_scope(Contract).order(due_date: :asc)
   end
 
   def destroy

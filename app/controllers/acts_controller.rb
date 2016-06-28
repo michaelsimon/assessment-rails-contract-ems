@@ -19,14 +19,14 @@ class ActsController < ApplicationController
   def update
     if @act.update(act_params)
       redirect_to @act
-      else
-        render 'edit'
-      end
+    else
+      render 'edit'
+    end
   end
 
   def show
-    # @performances = @act.performances
-    @performances = policy_scope(Performance)
+    @performances_upcoming = policy_scope(Performance).order(perf_date: :asc).where('perf_date >= ? and act_id = ?', Date.today, @act.id)
+    @performances_past = policy_scope(Performance).order(perf_date: :asc).where('perf_date < ? and act_id = ?', Date.today, @act.id)
   end
 
   def index

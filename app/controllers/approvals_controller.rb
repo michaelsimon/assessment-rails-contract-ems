@@ -28,15 +28,8 @@ class ApprovalsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @approval.delete if @approval
-  #   redirect_to contract_path(@approval.contract)
-  # end
-
   private
   def get_approval
     authorize @approval = Approval.find_by(id: params[:id])
   end
-
-
 end
