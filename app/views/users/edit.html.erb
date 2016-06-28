@@ -1,14 +1,11 @@
-<div class="row">
-  <div class="col-sm-offset-1 col-sm-8"><h1><%= "#{params[:action].capitalize} #{params[:controller].singularize.capitalize}" %></h1></div>
-</div>
-<div class="panel panel-default col-sm-offset-1 col-sm-10">
-  <div class="panel-body">
 <h2><%= @user.name %></h2>
 <%= form_for @user do |f| %>
 <%= render partial: "shared/errors", locals: {md: @user} %>
-<%= f.label :approved %> <%= f.check_box :approved, {class: "form-control"}%>
+<%= f.label :approved %>&nbsp;&nbsp;<%= f.check_box :approved, {class: "checkbox-inline"}%>
 <br />
-<%= f.label :role %> <%= f.select :role, options_for_role, {}, {class: "form-control"} %>
+<%= f.label :role %>
+<br />
+<%= f.select :role, options_for_role, {}, {class: "form-control"} %>
 <br />
 <%= f.label 'Act' %>
 <br />
@@ -20,5 +17,3 @@
 <br />
 <%= f.submit class: "btn btn-primary" %>
 <% end %>
-</div>
-</div>
