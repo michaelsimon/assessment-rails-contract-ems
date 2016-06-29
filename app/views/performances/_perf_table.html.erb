@@ -5,12 +5,14 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Act</th>
         <th>Venue</th>
         <th>Date</th>
         <th>Contract</th>
+        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
-      <%= render partial: "performance", collection: (collection) %>
+      <%= render partial: "performances/performance", collection: (collection) %>
     </tbody>
   </table>

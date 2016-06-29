@@ -1,9 +1,6 @@
-<div class="row">
-  <br />
-  <div class="panel panel-default col-sm-offset-1 col-sm-10">
-      <% if policy(:venue).edit? %>
-        <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_venue_path(@venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, venue_path(@venue), method: :delete %></div>
-      <% end %>
+<% if policy(:venue).edit? %>
+<div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_venue_path(@venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, venue_path(@venue), method: :delete %></div>
+<% end %>
 <h1><%= @venue.name %></h1>
 <p>
   <strong>Address:</strong><br>
@@ -19,83 +16,12 @@
   &nbsp;
 </p>
 <h4>Users:</h4>
-<div class="panel panel-default col-sm-10">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Phone</th>
-        <th>E-mail</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |u| %>
-      <tr>
-        <td><%= u.name %></td>
-        <td><%= u.title %></td>
-        <td><%= u.phone %></td>
-        <td><%= mail_to u.email %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="panel panel-default col-sm-12">
+  <%= render partial: "users/user_table", locals: {collection: @users} %>
 </div>
-
-<div class="panel panel-default col-sm-10">
-  <div class="panel-heading"><strong>Upcoming Performances at <%= @venue.name %></strong></div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Act</th>
-        <th>Date</th>
-        <th>Contract</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @performances.order(perf_date: :asc).where('perf_date >= ?', Date.today).each do |perf| %>
-      <tr>
-        <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
-        <td><%= perf.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
-        <td><%= perf.fmatdate %></td>
-        <td>
-        <% if perf.try(:contract) %>
-        <%= perf.contract.status %> <%= link_to "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %>
-                  <% end %>
-                </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<div class="panel panel-default col-sm-10">
-  <div class="panel-heading"><strong>Past Performances</strong></div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Act</th>
-        <th>Date</th>
-        <th>Contract</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @performances.order(perf_date: :desc).where('perf_date < ?', Date.today).each do |perf| %>
-      <tr>
-        <td><%= perf.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(perf) %></td>
-        <td><%= perf.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(perf.act) %></td>
-        <td><%= perf.fmatdate %></td>
-        <td>
-          <% if perf.try(:contract) %>
-            <%= perf.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(perf.contract) %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-</div>
-</div>
+<p>
+  &nbsp;
+</p>
+<%= render partial: "performances/perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
+<br />
+<%= render partial: "performances/perf_table", locals: {title: "Past Shows", collection: @performances_past} %>

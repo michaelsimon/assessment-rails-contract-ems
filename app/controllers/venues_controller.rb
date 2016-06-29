@@ -13,7 +13,7 @@ class VenuesController < ApplicationController
       render 'new'
     end
   end
-
+  
   def edit
   end
 
@@ -27,7 +27,8 @@ class VenuesController < ApplicationController
 
   def show
     @users = @venue.users
-    @performances = policy_scope(Performance)
+    @performances_upcoming = policy_scope(Performance).order(perf_date: :asc).where('perf_date >= ? and venue_id = ?', Date.today, @venue.id)
+    @performances_past = policy_scope(Performance).order(perf_date: :asc).where('perf_date < ? and venue_id = ?', Date.today, @venue.id)
   end
 
   def index

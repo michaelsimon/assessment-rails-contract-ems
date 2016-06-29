@@ -14,6 +14,6 @@
   <p>
     &nbsp;
   </p>
-  <%= render partial: "show_perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
+  <%= render partial: "performances/perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
   <br />
-  <%= render partial: "show_perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
+  <%= render partial: "performances/perf_table", locals: {title: "Past Shows", collection: @performances_past} %>

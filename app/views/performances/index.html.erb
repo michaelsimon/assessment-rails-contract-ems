@@ -1,3 +1,4 @@
-<%= render partial: "index_perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
 <br />
-<%= render partial: "index_perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
+<%= render partial: "perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
+<br />
+<%= render partial: "perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
