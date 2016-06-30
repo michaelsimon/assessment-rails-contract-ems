@@ -1,7 +1,7 @@
 class ActPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.is_admin
+      if user.try(:is_admin)
         scope.all
       elsif user.try(:venue?)
         scope.joins(:performances).where("performances.venue_id = ?", user.venue_id).distinct
@@ -14,11 +14,11 @@ class ActPolicy < ApplicationPolicy
   end
 
   def new?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def create?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def destroy?
@@ -26,15 +26,15 @@ class ActPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.is_admin || (user.act? && user.act == record)
+    user.try(:is_admin) || (user.act? && user.act == record)
   end
 
   def update?
-    user.is_admin || (user.act? && user.act == record)
+    user.try(:is_admin) || (user.act? && user.act == record)
   end
 
   def show?
-    user.is_admin || (user.act? && user.act == record) || (user.venue? && record.performances.map {|r| r.venue_id}.include?(user.venue_id))
+    user.try(:is_admin) || (user.act? && user.act == record) || (user.venue? && record.performances.map {|r| r.venue_id}.include?(user.venue_id))
   end
 
   def index?

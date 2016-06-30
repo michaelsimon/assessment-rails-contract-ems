@@ -1,7 +1,7 @@
 class VenuePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.is_admin
+      if user.try(:is_admin)
         scope.all
       elsif user.try(:venue?)
         scope.where(id: user.venue_id)
@@ -14,11 +14,11 @@ class VenuePolicy < ApplicationPolicy
   end
 
   def new?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def create?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def destroy?
@@ -26,15 +26,15 @@ class VenuePolicy < ApplicationPolicy
   end
 
   def edit?
-    user.is_admin || (user.venue? && user.venue == record)
+    user.try(:is_admin) || (user.venue? && user.venue == record)
   end
 
   def update?
-    user.is_admin || (user.venue? && user.venue == record)
+    user.try(:is_admin) || (user.venue? && user.venue == record)
   end
 
   def show?
-    user.is_admin || (user.venue? && user.venue == record) || (user.act? && record.performances.map {|r| r.act_id}.include?(user.act_id))
+    user.try(:is_admin) || (user.venue? && user.venue == record) || (user.act? && record.performances.map {|r| r.act_id}.include?(user.act_id))
   end
 
   def index?

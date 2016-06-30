@@ -1,7 +1,7 @@
 class ContractPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.is_admin
+      if user.try(:is_admin)
         scope.all
       elsif user.try(:venue?)
         scope.joins(:performance).where("performances.venue_id = ?", user.venue_id)
@@ -14,11 +14,11 @@ class ContractPolicy < ApplicationPolicy
   end
 
   def new?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def create?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def destroy?
@@ -26,15 +26,15 @@ class ContractPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def update?
-    user.is_admin
+    user.try(:is_admin)
   end
 
   def show?
-    user.is_admin || (user.act? && user.act == record.performance.act) || (user.venue? && user.venue == record.performance.venue)
+    user.try(:is_admin) || (user.act? && user.act == record.performance.act) || (user.venue? && user.venue == record.performance.venue)
   end
 
   def index?
