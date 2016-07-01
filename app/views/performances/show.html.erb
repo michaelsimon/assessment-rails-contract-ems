@@ -1,15 +1,12 @@
-
-    <% if policy(:performance).edit? %>
-      <div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_performance_path(@performance) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, act_path(@performance), method: :delete %></div>
-    <% end %>
+<%= render partial: "edit_links", locals: {resource: @performance, text: true, displaytype: "page"} %>
 <h1><%= @performance.name %></h1>
 
 <p><%= icon('file-text-o') %>
-<% if @performance.try(:contract) %>
-<%= link_to 'View Contract', contract_path(@performance.contract) %>
-<% else %>
-<%= link_to 'Create Contract', new_contract_path(:performance_id => @performance.id) %>
-<% end %>
+  <% if @performance.try(:contract) %>
+  <%= link_to 'View Contract', contract_path(@performance.contract) %>
+  <% else %>
+  <%= link_to 'Create Contract', new_contract_path(:performance_id => @performance.id) %>
+  <% end %>
 </p>
 <p><strong>Date: </strong><%= fmatdate(@performance.perf_date) %> | <strong>Time: </strong><%= fmattime(@performance.perf_time) %></p>
 <p><strong>Act: </strong><%= link_to @performance.act.name, act_path(@performance.act)  %></p>

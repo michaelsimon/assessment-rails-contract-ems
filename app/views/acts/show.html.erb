@@ -1,8 +1,4 @@
-<% if policy(:act).edit? %>
-<div style="float: right;">
-  <br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_act_path(@act) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, act_path(@act), method: :delete %>
-</div>
-<% end %>
+<%= render partial: "edit_links", locals: {resource: @act, text: true, displaytype: "page"} %>
 <h1><%= @act.name %></h1>
 <p><strong>Description:</strong><br />
   <%= @act.description %></p>

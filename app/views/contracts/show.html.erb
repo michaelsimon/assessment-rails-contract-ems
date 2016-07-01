@@ -1,6 +1,4 @@
-<% if policy(:venue).edit? %>
-<div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_path(@contract) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_path(@contract), method: :delete %></div>
-<% end %>
+<%= render partial: "edit_links", locals: {resource: @contract,  text: true, displaytype: "page"} %>
 <h1><%= @contract.performance.name %></h1>
 <p>
   <strong>Date: </strong><%= fmatdate(@contract.performance.perf_date) %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(@contract.performance) %><br>

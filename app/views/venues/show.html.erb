@@ -1,6 +1,4 @@
-<% if policy(:venue).edit? %>
-<div style="float: right;"><br /><%= link_to "#{icon('pencil')} Edit".html_safe, edit_venue_path(@venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, venue_path(@venue), method: :delete %></div>
-<% end %>
+<%= render partial: "edit_links", locals: {resource: @venue, text: true, displaytype: "page"} %>
 <h1><%= @venue.name %></h1>
 <p>
   <strong>Address:</strong><br>

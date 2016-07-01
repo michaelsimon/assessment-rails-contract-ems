@@ -3,5 +3,5 @@
   <td><%= venue.city %>, <%= venue.state %></td>
   <td><%= venue.phone %></td><td><%= mail_to venue.email, venue.email %></td>
   <td><%= link_to venue.website, venue.website %></td>
-  <td><%= link_to "#{icon('eye')}".html_safe, venue_path(venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_venue_path(venue) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, venue_path(venue), method: :delete %></td>
+  <td><%= render partial: "edit_links", locals: {resource: venue, text: false, displaytype: "row"} %></td>
 </tr>

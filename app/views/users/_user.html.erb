@@ -3,5 +3,5 @@
   <td><%= mail_to user.email %></td>
   <td><%= user.role %></td>
   <td><%= user.approved %></td>
-  <td><%= link_to "#{icon('pencil')}".html_safe, edit_user_path(user) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, user_path(user), method: :delete %></td>
+  <td><%= render partial: "edit_links", locals: {resource: user, text: false, displaytype: "row"} %>
 </tr>

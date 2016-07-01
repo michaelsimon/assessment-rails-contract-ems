@@ -8,5 +8,5 @@
     <%= performance.contract.status %> <%= link_to  "#{icon('arrow-circle-right')}".html_safe, contract_path(performance.contract) %>
   <% end %>
   </td>
-  <td><%= link_to "#{icon('eye')}".html_safe, performance_path(performance) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('pencil')}".html_safe, edit_performance_path(performance) %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')}".html_safe, performance_path(performance), method: :delete %></td>
+  <td><%= render partial: "edit_links", locals: {resource: performance, text: false, displaytype: "row"} %></td>
 </tr>

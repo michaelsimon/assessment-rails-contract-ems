@@ -1,0 +1,15 @@
+<% if displaytype == "page" %>
+<div style="float: right"><br />
+  <% end %>
+  <% if policy(resource).show? && displaytype == "row" %>
+  <%= link_to "#{icon('eye')}#{' View' if text == true}".html_safe, send("#{resource.class.to_s.underscore()}_path", resource) %>&nbsp;&nbsp;
+  <% end %>
+  <% if policy(resource).edit? %>
+  <%= link_to "#{icon('pencil')}#{' Edit' if text == true}".html_safe, send("edit_#{resource.class.to_s.underscore()}_path", resource) %>&nbsp;&nbsp;
+  <% end %>
+  <% if policy(resource).destroy? %>
+  <%= link_to "#{icon('trash-o')}#{' Delete' if text == true}".html_safe, send("#{resource.class.to_s.underscore()}_path", resource), method: :delete %>
+  <% end %>
+  <% if displaytype == "page" %>
+</div>
+<% end %>
