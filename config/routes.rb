@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :acts
   resources :contracts do
-    resources :documents
+    resources :documents, only: [:new, :create, :edit, :update, :destroy, :show]
   end
   resources :performances
   scope 'admin' do
@@ -14,6 +14,5 @@ Rails.application.routes.draw do
   post 'approvals/:id/approve' => 'approvals#approve', as: :contract_apvl_approve
   post 'approvals/:id/reject' => 'approvals#reject', as: :contract_apvl_reject
   post 'approvals/:id/cancel' => 'approvals#cancel', as: :contract_apvl_cancel
-  # get  'admin/users/:id/edit' => 'users#edit'
   root 'general#welcome'
 end
