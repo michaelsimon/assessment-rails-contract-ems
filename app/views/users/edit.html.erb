@@ -1,6 +1,27 @@
 <h2><%= @user.name %></h2>
 <%= form_for @user do |f| %>
 <%= render partial: "shared/errors", locals: {md: @user} %>
+<%= f.label :name %><br />
+<div class="field input-group">
+  <span class="input-group-addon" id="basic-addon1"><%= icon('user') %></span>
+  <%= f.text_field :name, autofocus: true, class:'form-control' %>
+</div>
+<%= f.label 'Organization/Title'%><br />
+<div class="field input-group">
+  <span class="input-group-addon" id="basic-addon1"><%= icon('building-o') %></span>
+  <%= f.text_field :title, class:'form-control' %>
+</div>
+<%= f.label :phone %><br />
+<div class="field input-group">
+  <span class="input-group-addon" id="basic-addon1"><%= icon('phone') %></span>
+  <%= f.text_field :phone, class:'form-control' %>
+</div>
+<%= f.label :email %><br />
+<div class="field input-group">
+  <span class="input-group-addon" id="basic-addon1"><%= icon('envelope') %></span>
+  <%= f.email_field :email, class:'form-control' %>
+</div>
+<br />
 <%= f.label :approved %>&nbsp;&nbsp;<%= f.check_box :approved, {class: "checkbox-inline"}%>
 <br />
 <%= f.label :role %>
@@ -15,5 +36,7 @@
 <br />
 <%= f.collection_select(:venue_id, Venue.all, :id, :name, {include_blank: 'Select'}, {class: "form-control"}) %>
 <br />
+
+
 <%= f.submit class: "btn btn-primary" %>
 <% end %>
