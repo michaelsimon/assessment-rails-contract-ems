@@ -8,7 +8,7 @@ class Performance < ActiveRecord::Base
 
   def check_perf_date
     if perf_date.present?
-      unless perf_date > Date.today
+      unless perf_date >= Date.today
         errors.add(:performance, "Performance date must be in the future.")
       end
     end
