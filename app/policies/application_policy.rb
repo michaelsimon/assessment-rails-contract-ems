@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    user.present? && !user.role.nil?
   end
 
   def show?
@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    user.present? && user.is_admin
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    user.present? && user.is_admin
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    user.present? && user.super_admin?
   end
 
   def scope

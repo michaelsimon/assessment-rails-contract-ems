@@ -9,17 +9,6 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  def destroy?
-    user.present? && user.is_admin
-  end
-
-  def edit?
-    user.present? && user.is_admin
-  end
-
-  def update?
-    user.present? && user.is_admin
-  end
 
   def index?
     user.present? && user.is_admin

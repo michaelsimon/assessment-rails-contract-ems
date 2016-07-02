@@ -13,20 +13,8 @@ class ActPolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    user.present? && user.is_admin
-  end
-
-  def create?
-    user.present? && user.is_admin
-  end
-
-  def destroy?
-    user.present? && user.super_admin?
-  end
-
   def edit?
-    user.present? && (user.is_admin || (user.act? && user.act == record))
+    update?
   end
 
   def update?
@@ -35,10 +23,6 @@ class ActPolicy < ApplicationPolicy
 
   def show?
     user.present? && (user.is_admin || (user.act? && user.act == record) || (user.venue? && record.performances.map {|r| r.venue_id}.include?(user.venue_id)))
-  end
-
-  def index?
-    user.present? && !user.role.nil?
   end
 
 end

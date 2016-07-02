@@ -13,32 +13,8 @@ class PerformancePolicy < ApplicationPolicy
     end
   end
 
-  def new?
-    user.present? && user.is_admin
-  end
-
-  def create?
-    user.present? && user.is_admin
-  end
-
-  def destroy?
-    user.present? && user.super_admin?
-  end
-
-  def edit?
-    user.present? && user.is_admin
-  end
-
-  def update?
-    user.present? && user.is_admin
-  end
-
   def show?
     user.present? && (user.is_admin|| (user.act? && user.act == record.act) || (user.venue? && user.venue == record.venue))
-  end
-
-  def index?
-    user.present? && !user.role.nil?
   end
 
 end
