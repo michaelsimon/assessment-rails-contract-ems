@@ -1,8 +1,10 @@
 <%= render partial: "edit_links", locals: {resource: @act, text: true, displaytype: "page"} %>
 <h1><%= @act.name %></h1>
 <p><strong>Description:</strong><br />
-  <%= @act.description %></p>
+  <%= @act.description %>
+</p>
   <p>
+    <strong># of Performances: </strong><%= @act.num_of_performances %><br>
     <strong>Location: </strong><%= @act.location %><br>
     <strong>Size: </strong><%= @act.size %><br>
     <strong>Website: </strong><%= link_to @act.website %><br>

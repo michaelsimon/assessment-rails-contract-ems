@@ -5,4 +5,8 @@ class Act < ActiveRecord::Base
 
   validates_presence_of :name, :description, :location, :size
   validates :website, presence: true, format: { with: URI.regexp }
+
+  def num_of_performances
+    performances.count
+  end
 end
