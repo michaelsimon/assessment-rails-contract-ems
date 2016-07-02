@@ -1,6 +1,6 @@
 <%= form_for @contract do |f| %>
   <%= render partial: "shared/errors", locals: {md: @contract} %>
-  <h3>Contract Details</h3>
+  <h3>Details</h3>
   <%= f.label :performance %><br />
   <%= Performance.find_by(id: (params[:performance_id] || f.object.performance_id)).try(:performance_string) %>
   <%= f.hidden_field :performance_id, {:value => (f.object.performance_id || params[:performance_id])} %>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%
-@path = params[:controller] %>
+<% @path = params[:controller] %>
 <html>
 <head>
   <title>Entertainment Management System</title>
@@ -48,7 +47,7 @@
         <div class="col-sm-12">
           <div class="row">
             <div class="col-sm-offset-1 col-sm-8">
-              <h1><%= "#{params[:controller].capitalize}" %></h1>
+              <h1><%= "#{params[:controller].capitalize}" unless params[:controller].match(/general|devise/) %></h1>
             </div>
           </div>
           <div class="panel panel-default col-sm-offset-1 col-sm-10">

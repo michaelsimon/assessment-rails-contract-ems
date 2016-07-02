@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :acts
   resources :contracts do
-    resources :documents, only: [:new, :create, :edit, :update, :destroy, :show]
+    resources :documents, only: [:new, :create, :edit, :update, :destroy, :show], as: :documents
   end
   resources :performances
   scope 'admin' do

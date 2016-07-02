@@ -13,7 +13,7 @@ class VenuesController < ApplicationController
       render 'new'
     end
   end
-  
+
   def edit
   end
 

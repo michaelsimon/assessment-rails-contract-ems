@@ -14,7 +14,7 @@
   <strong>Contract Details: </strong><br /><%= @contract.performance.description %>
 </p>
 <h3>Documents</h3>
-<% if policy(:document).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, new_contract_document_path(@contract)%></p><% end %>
+<% if policy(:contract).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, new_contract_document_path(@contract)%></p><% end %>
 <div class="panel panel-default col-sm-11">
   <table class="table">
     <thead>
