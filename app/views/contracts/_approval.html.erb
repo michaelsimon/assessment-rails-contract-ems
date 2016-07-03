@@ -2,6 +2,7 @@
   <td><%= approval.user.name %></td>
   <td><%= approval.user.role %></td>
   <td><%= fmatdate(approval.date_requested) %></td>
+  <td><%= fmatdate(approval.date_answered) %></td>
   <td><%= approval.status %></td>
   <td>
     <% if approval.status == 'pending' && current_user.try(:id) == approval.user_id %>

@@ -13,11 +13,11 @@ module ApplicationHelper
   end
 
   def fmatdate(date)
-    date.strftime("%a %m/%d/%Y")
+    date.strftime("%a %m/%d/%Y") if date
   end
 
   def fmattime(date)
-    date.strftime("%I:%M %p")
+    date.strftime("%I:%M %p") if date
   end
 
 end

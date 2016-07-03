@@ -1,11 +1,13 @@
 <%= render partial: "edit_links", locals: {resource: @performance, text: true, displaytype: "page"} %>
 <h1><%= @performance.name %></h1>
 
-<p><%= icon('file-text-o') %>
+<p>
   <% if @performance.try(:contract) %>
-  <%= link_to 'View Contract', contract_path(@performance.contract) %>
+  <%= link_to "#{icon('file-text-o')} View Contract".html_safe, contract_path(@performance.contract) %>
   <% else %>
-  <%= link_to 'Create Contract', new_contract_path(:performance_id => @performance.id) %>
+  <% if policy(:contract).new? %>
+  <%= link_to "#{icon('file-text-o')} Create Contract".html_safe, new_contract_path(:performance_id => @performance.id) %>
+  <% end %>
   <% end %>
 </p>
 <p><strong>Date: </strong><%= fmatdate(@performance.perf_date) %> | <strong>Time: </strong><%= fmattime(@performance.perf_time) %></p>
