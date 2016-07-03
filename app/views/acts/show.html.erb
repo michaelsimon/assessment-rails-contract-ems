@@ -12,6 +12,13 @@
   <p>
     &nbsp;
   </p>
+  <h4>Users:</h4>
+  <div class="panel panel-default col-sm-12">
+    <%= render partial: "users/user_table", locals: {collection: @users} %>
+  </div>
+  <p>
+    &nbsp;
+  </p>
   <%= render partial: "performances/perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
   <br />
   <%= render partial: "performances/perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
