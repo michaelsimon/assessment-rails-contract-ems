@@ -55,10 +55,12 @@ Performance:
  * Date Answered
  * Status
 
- ***Authentication
+ **Authentication**
+
  Any user can create an account on the site, however they must be approved by an administrator and associated with a venue, an act, or the agency. Additionally, once approved and logged in, a user can associate their EMS account with a Google and/or LinkedIn account for single sign-on.
 
- ***Authorization
+ **Authorization**
+
  With part of the approval process specifying whether a user is associated with a specific venue, a specific act, or the agency, confidentiality of information is maintained. Users of a specific venue or act are only able to access information on  act(s), venue(s), performances, and contracts, that are relevant to that entity.(i.e. a venue or an act can see only their own performances and contracts, an act can only see venues they are performing at, a venue can only see acts performing at their venue, etc.) Conversely, an agency user can access all data.
 
  User:
