@@ -14,20 +14,20 @@
     <div class="collapse navbar-collapse">
       <% if current_user %>
       <ul class="nav navbar-nav">
-        <li class="dropdown <%= 'active' if @path.include?("performances") %>">
+        <li class="dropdown <%= 'active' if current_controller == "performances" %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('music') %> Performances<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if policy(:performance).index? %><li><%= link_to 'List All My Performances', performances_path %></li><% end %>
             <% if policy(:performance).new? %><li><%= link_to 'Add Performance', new_performance_path %></li><% end %>
           </ul>
         </li>
-        <li class="dropdown <%= 'active' if @path == "contracts" %>">
+        <li class="dropdown <%= 'active' if current_controller == "contracts" %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('book') %> Contracts<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if policy(:contract).index? %><li><%= link_to 'List My Contracts', contracts_path %></li><% end %>
           </ul>
         </li>
-        <li class="dropdown <%= 'active' if @path == "acts" %>">
+        <li class="dropdown <%= 'active' if current_controller == "acts" %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('star') %> Acts<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if policy(:act).index? && current_user.role != 'act' %><li><%= link_to 'List All My Acts', acts_path %></li><% end %>
@@ -35,7 +35,7 @@
             <% if policy(:act).new? %><li><%= link_to 'Add Act', new_act_path %></li><% end %>
           </ul>
         </li>
-        <li class="dropdown <%= 'active' if @path =="venues" %>">
+        <li class="dropdown <%= 'active' if current_controller =="venues" %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('map-marker') %> Venues<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <% if policy(:venue).index? && current_user.role != 'venue' %><li><%= link_to 'List My Venues', venues_path %></li><% end %>
@@ -43,10 +43,10 @@
             <% if policy(:venue).new? %><li><%= link_to 'Add Venue', new_venue_path %></li><% end %>
           </ul>
         </li>
-        <% if policy(:user).edit? %><li class="<%= 'active' if @path.include?("users") %>"><%= link_to "#{icon('users')} Modify Users".html_safe, users_path %></li><% end %>
+        <% if policy(:user).edit? %><li class="<%= 'active' if current_controller == "users" %>"><%= link_to "#{icon('users')} Modify Users".html_safe, users_path %></li><% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown <%= 'active' if @path == "users" %>">
+        <li class="dropdown <%= 'active' if current_controller == "devise/registrations" %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('user') %> Hi <%= current_user.name %><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
@@ -56,10 +56,10 @@
       </ul>
       <% else %>
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= 'active' if @path.include?("users") %>"><%= link_to 'Register', new_user_registration_path %></li>
+        <li class="<%= 'active' if current_controller == "devise/registrations" %>"><%= link_to 'Register', new_user_registration_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= 'active' if @path.include?("sessions") %>"><%= link_to 'Login', new_user_session_path %></li>
+        <li class="<%= 'active' if current_controller == "devise/sessions" %>"><%= link_to 'Login', new_user_session_path %></li>
       </ul>
       <% end %>
     </div><!-- /.navbar-collapse -->

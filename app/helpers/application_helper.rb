@@ -20,4 +20,8 @@ module ApplicationHelper
     date.strftime("%I:%M %p") if date
   end
 
+  def current_controller
+   params[:controller]
+  end
+
 end
