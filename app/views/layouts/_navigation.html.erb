@@ -24,7 +24,7 @@
         <li class="dropdown <%= 'active' if current_controller == "contracts" %>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= icon('book') %> Contracts<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <% if policy(:contract).index? %><li><%= link_to 'List My Contracts', contracts_path %></li><% end %>
+            <% if policy(:contract).index? %><li><%= link_to 'List My Contracts', contracts_path %></li><li><%= link_to 'My Pending Approvals', approvals_pending_path %></li><% end %>
           </ul>
         </li>
         <li class="dropdown <%= 'active' if current_controller == "acts" %>">
