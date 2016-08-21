@@ -21,5 +21,9 @@ class Approval < ActiveRecord::Base
     self.date_answered = Time.now
     self.save
   end
-  
+
+  def self.pending_approval(user)
+    Approval.where(user: user, status: "pending")
+  end
+
 end

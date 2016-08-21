@@ -1,0 +1,15 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Act</th>
+      <th>Venue</th>
+      <th>Performance Date</th>
+      <th>Approval Status</th>
+      <th>Contract Status</th>
+    </tr>
+  </thead>
+  <tbody>
+     <%= render(@approvals) || "<tr><td colspan='6'>No data to list</td></tr>".html_safe %>
+  </tbody>
+</table>

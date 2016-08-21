@@ -28,6 +28,11 @@ class ApprovalsController < ApplicationController
     end
   end
 
+
+  def pending_approval
+    @approvals = Approval.pending_approval(current_user)
+  end
+
   private
   def get_approval
     authorize @approval = Approval.find_by(id: params[:id])
