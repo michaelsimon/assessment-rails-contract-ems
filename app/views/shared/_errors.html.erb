@@ -1,3 +1,8 @@
-<% md.errors.full_messages.each do |msg| %>
-  <li><%= msg %></li>
-  <% end %>
+<% if md.errors.any? %>
+<h3>Error(s)</h3>
+  <ul>
+    <% md.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
