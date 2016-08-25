@@ -30,7 +30,7 @@ class ApprovalsController < ApplicationController
 
 
   def pending_approval
-    @approvals = Approval.pending_approval(current_user)
+    authorize @approvals = Approval.pending_approval
   end
 
   private

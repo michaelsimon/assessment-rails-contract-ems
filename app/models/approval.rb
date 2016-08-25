@@ -22,8 +22,8 @@ class Approval < ActiveRecord::Base
     self.save
   end
 
-  def self.pending_approval(user)
-    Approval.where(user: user, status: "pending")
+  def self.pending_approval
+    self.where(status: "pending")
   end
 
 end

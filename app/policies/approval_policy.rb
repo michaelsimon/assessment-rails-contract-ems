@@ -16,4 +16,9 @@ class ApprovalPolicy < ApplicationPolicy
   end
 
 
+  def pending_approval?
+    user.present? && user.is_admin
+  end
+
+
 end

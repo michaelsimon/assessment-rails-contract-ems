@@ -3,6 +3,5 @@
   <td><%= approval.contract.performance.act.name %>  <%= link_to "#{icon('arrow-circle-right')}".html_safe, act_path(approval.contract.performance.act) %></td>
   <td><%= approval.contract.performance.venue.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe, venue_path(approval.contract.performance.venue) %></td>
   <td><%= fmatdate(approval.contract.performance.perf_date) %></td>
-  <td><%= approval.status %></td>
-  <td><%= approval.contract.status %></td>
+  <td><%= "#{approval.user.name} (#{approval.user.email})" %></td>
 </tr>
