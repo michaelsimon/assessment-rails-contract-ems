@@ -7,7 +7,7 @@ Specs:
 - [x] Include at least one has_many through relationship - _a Venue and Act has_many Contracts through Performances_
 - [x] The "through" part of the has_many through includes at least one user submittable attribute - _performance.name, performance.perf_date, performance.perf_time, performance.tkts_url, performance.description_
 - [x] Include reasonable validations for simple model objects - _act.website format, contract.due_date not in the past, document.location format, uniqueness of identity.uid & identity.provider, performance.perf_date not in the past, performance.tkts_url format, user.email is unique, venue.email format_
-- [x] Include a class level ActiveRecord scope method - _View Approval requests in "pending status" for a given user (/approvals/pending)_
+- [x] Include a class level ActiveRecord scope method - _View Approval requests in "pending status" (/approvals/pending)_
 - [x] Include a nested form writing to an associated model using a custom attribute writer - _addition of approvals are nested within contract form_
 - [x] Include signup _implemented via Devise with customization to require approval before site use_
 - [x] Include login - _implemented via Devise_
