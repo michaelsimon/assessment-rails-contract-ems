@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'general#welcome'
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :acts
   resources :contracts do
@@ -14,7 +15,5 @@ Rails.application.routes.draw do
   post 'approvals/:id/approve' => 'approvals#approve', as: :contract_apvl_approve
   post 'approvals/:id/reject' => 'approvals#reject', as: :contract_apvl_reject
   post 'approvals/:id/cancel' => 'approvals#cancel', as: :contract_apvl_cancel
-  get  'admin/users/:id' => 'users#edit'
-  root 'general#welcome'
   get  'approvals/pending' => 'approvals#pending_approval'
 end
