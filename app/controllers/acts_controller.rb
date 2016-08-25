@@ -26,8 +26,9 @@ class ActsController < ApplicationController
 
   def show
     @users = @act.users
-    @performances_upcoming = policy_scope(Performance).order(perf_date: :asc).where('perf_date >= ? and act_id = ?', Date.today, @act.id)
-    @performances_past = policy_scope(Performance).order(perf_date: :asc).where('perf_date < ? and act_id = ?', Date.today, @act.id)
+    performances = policy_scope(Performance).order(perf_date: :asc)
+    @performances_upcoming = performances.where('perf_date >= ? and act_id = ?', Date.today, @act.id)
+    @performances_past = performances.where('perf_date < ? and act_id = ?', Date.today, @act.id)
   end
 
   def index
