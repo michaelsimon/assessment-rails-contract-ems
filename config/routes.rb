@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :venues
 
-  post 'approvals/:id/approve' => 'approvals#approve', as: :contract_apvl_approve
+  post 'approvals/approve' => 'approvals#approve', as: :contract_apvl_approve
   post 'approvals/:id/reject' => 'approvals#reject', as: :contract_apvl_reject
   post 'approvals/:id/cancel' => 'approvals#cancel', as: :contract_apvl_cancel
   get  'approvals/pending' => 'approvals#pending_approval'

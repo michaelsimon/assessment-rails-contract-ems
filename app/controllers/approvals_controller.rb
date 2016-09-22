@@ -3,28 +3,37 @@ class ApprovalsController < ApplicationController
 
   def approve
     if @approval && (@approval.user_id == current_user.id || current_user.is_admin)
-      @approval.mark_approved
-      redirect_to contract_path(@approval.contract_id)
+      if @approval.mark_approved
+        render json: @approval, status: 201
+      else
+        render status: 400
+      end
     else
-      redirect_to :back
+      render status: 401
     end
   end
 
   def reject
     if @approval && (@approval.user_id == current_user.id)
-      @approval.mark_rejected
-      redirect_to contract_path(@approval.contract_id)
+      if @approval.mark_rejected
+        render json: @approval, status: 201
+      else
+        render status: 400
+      end
     else
-      redirect_to :back
+      render status: 401
     end
   end
 
   def cancel
     if @approval && current_user.is_admin
-      @approval.mark_cancelled
-      redirect_to contract_path(@approval.contract_id)
+      if @approval.mark_cancelled
+        render json: @approval, status: 201
+      else
+        render status: 400
+      end
     else
-      redirect_to :back
+      render status: 401
     end
   end
 

@@ -11,7 +11,7 @@ $(document).ready(function() {
         dataType: 'JSON',
         data: {id: $(this)[0].dataset.id}
       }).done(function(response, stat){
-        debugger;
+        
       });
     });
   });
