@@ -16,6 +16,7 @@ gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
+gem 'active_model_serializers', '~> 0.9.3'
 
 group :development, :test do
   gem 'byebug'
