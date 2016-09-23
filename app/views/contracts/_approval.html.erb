@@ -1,24 +1,24 @@
-<tr>
-  <td><%= approval.user.name %></td>
-  <td><%= approval.user.role %></td>
-  <td><%= fmatdate(approval.date_requested) %></td>
-  <td><%= fmatdate(approval.date_answered) %></td>
-  <td><%= approval.status %></td>
-  <td>
+<tr data-approval-id="<%= approval.id %>">
+  <td id="username"><%= approval.user.name %></td>
+  <td id="role"><%= approval.user.role %></td>
+  <td id="date_requested"><%= fmatdate(approval.date_requested) %></td>
+  <td id="date_answered"> <%= fmatdate(approval.date_answered) %></td>
+  <td id="status"><%= approval.status %></td>
+  <td id="buttons">
     <% if approval.status == 'pending' && current_user.try(:id) == approval.user_id %>
     <div style="float: left; padding-left:10px;">
-      <%= button_to contract_apvl_approve_path(approval), class:"btn btn-success btn-sm" do %>
+      <%= button_to contract_apvl_approve_path(approval), class:"btn btn-success btn-sm",  form: {"id" => "approve"}, data: {id: approval.id}  do %>
       <strong><%= icon('check') %> Approve</strong>
       <% end %>
     </div>
     <div style="float: left; padding-left:10px;">
-      <%= button_to contract_apvl_reject_path(approval), class:"btn btn-danger btn-sm" do %>
+      <%= button_to contract_apvl_reject_path(approval), class:"btn btn-danger btn-sm", id: "reject", data: {id: approval.id} do %>
       <strong><%= icon('times') %> Reject</strong>
       <% end %></div>
       <% end %>
       <% if approval.status == 'pending' && current_user.is_admin %>
       <div style="float: left; padding-left:10px;">
-        <%= button_to contract_apvl_cancel_path(approval), class:"btn btn-warning btn-sm" do %>
+        <%= button_to contract_apvl_cancel_path(approval), class:"btn btn-warning btn-sm", id: "cancel", data: {id: approval.id} do %>
         <strong><%= icon('ban') %> Cancel Approval Request</strong>
         <% end %>
       </div>
