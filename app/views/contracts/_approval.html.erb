@@ -12,13 +12,13 @@
       <% end %>
     </div>
     <div style="float: left; padding-left:10px;">
-      <%= button_to contract_apvl_reject_path(approval), class:"btn btn-danger btn-sm", id: "reject", data: {id: approval.id} do %>
+      <%= button_to contract_apvl_reject_path(approval), class:"btn btn-danger btn-sm", form: {"id" => "reject"}, data: {id: approval.id} do %>
       <strong><%= icon('times') %> Reject</strong>
       <% end %></div>
       <% end %>
       <% if approval.status == 'pending' && current_user.is_admin %>
       <div style="float: left; padding-left:10px;">
-        <%= button_to contract_apvl_cancel_path(approval), class:"btn btn-warning btn-sm", id: "cancel", data: {id: approval.id} do %>
+        <%= button_to contract_apvl_cancel_path(approval), class:"btn btn-warning btn-sm", form: {"id" => "cancel"}, data: {id: approval.id} do %>
         <strong><%= icon('ban') %> Cancel Approval Request</strong>
         <% end %>
       </div>
