@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   post 'approvals/reject' => 'approvals#reject', as: :contract_apvl_reject
   post 'approvals/cancel' => 'approvals#cancel', as: :contract_apvl_cancel
   get  'approvals/pending' => 'approvals#pending_approval'
+  get 'performances/:id/details' => 'performances#performance_detail'
 end

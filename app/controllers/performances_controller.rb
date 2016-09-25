@@ -1,5 +1,5 @@
 class PerformancesController < ApplicationController
-  before_action :get_performance, only: [:show, :edit, :update, :destroy]
+  before_action :get_performance, only: [:show, :edit, :update, :destroy, :performance_detail]
 
   def new
     authorize @performance = Performance.new
@@ -26,6 +26,14 @@ class PerformancesController < ApplicationController
   end
 
   def show
+  end
+
+  def performance_detail
+    if @performance
+      render json: @performance, status: 201
+    else
+      render status: 400
+    end
   end
 
   def index
