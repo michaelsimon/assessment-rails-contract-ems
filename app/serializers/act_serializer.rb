@@ -1,3 +1,3 @@
 class ActSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :description, :location, :size, :website
 end
