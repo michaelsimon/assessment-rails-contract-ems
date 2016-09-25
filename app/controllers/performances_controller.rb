@@ -30,10 +30,22 @@ class PerformancesController < ApplicationController
 
   def performance_detail
     if @performance
-      render json: @performance, status: 201
+      render json: @performance, serializer: PerformanceDetailSerializer, status: 201
     else
       render status: 400
     end
+  end
+
+  def performances_upcoming
+      authorize @performances_upcoming = policy_scope(Performance).order(perf_date: :asc).where('perf_date >= ?', Date.today)
+      if @performances_upcoming
+        render json: @performances_upcoming, each_serializer: PerformanceListSerializer, status: 201
+      else
+        render status: 400
+      end
+  end
+
+  def performances_past
   end
 
   def index

@@ -6,7 +6,7 @@ $(document).ready(function() {
   // debugger;
   var perf_id = $('div[data-id]').attr("data-id");
   $.get(`/performances/${perf_id}/details`, function(data) {
-    var perf = data.performance;
+    var perf = data.performance_detail;
     $('#perf_name').append(perf.name);
     $('#act').append(`<a href="/acts/${perf.act.id}">${perf.act.name}</a>`);
     $('#venue').append(`<a href="/venues/${perf.venue.id}">${perf.venue.name}</a>`);
