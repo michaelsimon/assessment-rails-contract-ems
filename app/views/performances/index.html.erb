@@ -1,4 +1,40 @@
 <br />
-<%= render partial: "perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
+<div class="panel-heading">
+  <strong>Upcoming Shows</strong>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Act</th>
+      <th>Venue</th>
+      <th>Date</th>
+      <th>Contract</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $.get("/performances/list/upcoming", function(data) {
+        var performances = data.performances
+        $.each(performances, function(index, performance) {
+          $('tbody').append (`
+            <tr>
+              <td class="col-md-2">${performance.name}</td>
+              <td><a href="/act/${performance.act.id}/">${performance.act.name}</a>
+              <td><a href="/venue/${performance.venue.id}/">${performance.venue.name}</a>
+              <td> ${performance.perf_date} | ${performance.perf_time}</td>
+              <td>${performance.contract !== null ? `<a href="/contracts/${performance.contract.id}/">${performance.contract.status}</a>` : ""}
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+          `);
+        });
+      });
+    });
+    </script>
+  </tbody>
+</table>
 <br />
 <%= render partial: "perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
