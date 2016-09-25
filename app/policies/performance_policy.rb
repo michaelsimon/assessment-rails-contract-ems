@@ -17,4 +17,8 @@ class PerformancePolicy < ApplicationPolicy
     user.present? && (user.is_admin|| (user.act? && user.act == record.act) || (user.venue? && user.venue == record.venue))
   end
 
+  def performance_detail?
+    self.show?
+  end
+
 end

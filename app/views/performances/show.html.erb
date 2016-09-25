@@ -1,6 +1,23 @@
 <%= render partial: "edit_links", locals: {resource: @performance, text: true, displaytype: "page"} %>
-<h1><%= @performance.name %></h1>
+<div data-id="<%= @performance.id %>" />
 
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  // debugger;
+  var perf_id = $('div[data-id]').attr("data-id");
+  $.get(`/performances/${perf_id}/details`, function(data) {
+    var perf = data.performance;
+    $('#perf_name').append(perf.name);
+    $('#act').append(`<a href="/acts/${perf.act.id}">${perf.act.name}</a>`);
+    $('#venue').append(`<a href="/venues/${perf.venue.id}">${perf.venue.name}</a>`);
+    $('#description').append(perf.description);
+    $('#tickets').append(`<a href=${perf.tkts_url}">${perf.tkts_url}</a>`);
+    $('#date').append(perf.perf_date);
+    $('#time').append(perf.perf_time);
+  });
+});
+</script>
+<h1 id='perf_name'></h1>
 <p>
   <% if @performance.try(:contract) %>
   <%= link_to "#{icon('file-text-o')} View Contract".html_safe, contract_path(@performance.contract) %>
@@ -10,8 +27,8 @@
   <% end %>
   <% end %>
 </p>
-<p><strong>Date: </strong><%= fmatdate(@performance.perf_date) %> | <strong>Time: </strong><%= fmattime(@performance.perf_time) %></p>
-<p><strong>Act: </strong><%= link_to @performance.act.name, act_path(@performance.act)  %></p>
-<p><strong>Venue: </strong><%= link_to @performance.venue.name, venue_path(@performance.venue)  %></p>
-<p><strong>Description: </strong><br /><%= @performance.description  %></p>
-<p><strong>Ticketing: </strong><%= link_to @performance.tkts_url, @performance.tkts_url, target: 'blank'  %></p>
+<p id="date_time"><strong>Date: </strong><span id="date"></span>| <strong>Time: </strong><span id="time"></span></p>
+<p id="act"><strong>Act: </strong></p>
+<p id="venue"><strong>Venue: </strong></p>
+<p id="description"><strong>Description: </strong><br /></p>
+<p id="tickets"><strong>Ticketing: </strong></p>
