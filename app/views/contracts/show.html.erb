@@ -15,6 +15,37 @@
 </p>
 <h3>Documents</h3>
 <% if policy(:contract).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, new_contract_document_path(@contract)%></p><% end %>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDocument">New Document</button>
+<div class="modal fade" id="addDocument" tabindex="-1" role="dialog" aria-labelledby="addDocument">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="newDocTitle">New Document</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="doc-name" class="control-label">Name:</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+          <div class="form-group">
+            <label for="doc-desc" class="control-label">Description:</label>
+            <input type="text" class="form-control" id="description">
+          </div>
+          <div class="form-group">
+            <label for="doc-location" class="control-label">Location:</label>
+            <input type="text" class="form-control" id="location">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Create Document</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="panel panel-default col-sm-11">
   <table class="table">
     <thead>
@@ -47,3 +78,14 @@
     </tbody>
   </table>
 </div>
+<script>
+$('#addDocument').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  // var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  // modal.find('.modal-title').text('New message to ' + recipient)
+  // modal.find('.modal-body input').val(recipient)
+});
+</script>
