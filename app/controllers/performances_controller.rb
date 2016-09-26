@@ -36,16 +36,19 @@ class PerformancesController < ApplicationController
     end
   end
 
-  def performances_upcoming
-      authorize @performances_upcoming = policy_scope(Performance).order(perf_date: :asc).where('perf_date >= ?', Date.today)
-      if @performances_upcoming
-        render json: @performances_upcoming, each_serializer: PerformanceListSerializer, status: 201
-      else
-        render status: 400
-      end
-  end
-
-  def performances_past
+  def performances_listing
+    if params[:time] == "upcoming"
+      range = 'perf_date >= ?'
+    elsif params[:time] == "past"
+      range = 'perf_date < ?'
+    end
+    puts "range" + range
+    authorize @performances = policy_scope(Performance).order(perf_date: :asc).where(range, Date.today)
+    if @performances
+      render json: @performances, each_serializer: PerformanceListSerializer, status: 201
+    else
+      render status: 400
+    end
   end
 
   def index

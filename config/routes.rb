@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :contracts do
     resources :documents, only: [:new, :create, :edit, :update, :destroy, :show], as: :documents
   end
+  get '/performances/list' => 'performances#performances_listing'
   resources :performances
+  get 'performances/:id/details' => 'performances#performance_detail'
   scope 'admin' do
     resources :users, only: [:index, :edit, :update, :destroy]
   end
@@ -16,6 +18,6 @@ Rails.application.routes.draw do
   post 'approvals/reject' => 'approvals#reject', as: :contract_apvl_reject
   post 'approvals/cancel' => 'approvals#cancel', as: :contract_apvl_cancel
   get  'approvals/pending' => 'approvals#pending_approval'
-  get 'performances/:id/details' => 'performances#performance_detail'
-  get '/performances/list/upcoming' => 'performances#performances_upcoming'
+
+
 end

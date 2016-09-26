@@ -13,21 +13,21 @@
       <th>&nbsp;</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="upcoming_performances">
     <script type="text/javascript">
     $(document).ready(function(){
-      $.get("/performances/list/upcoming", function(data) {
+      $.get("/performances/list?time=upcoming", function(data) {
         var performances = data.performances
         $.each(performances, function(index, performance) {
-          $('tbody').append (`
+          $('tbody#upcoming_performances').append (`
             <tr>
               <td class="col-md-2">${performance.name}</td>
-              <td><a href="/act/${performance.act.id}/">${performance.act.name}</a>
-              <td><a href="/venue/${performance.venue.id}/">${performance.venue.name}</a>
+              <td><a href="/acts/${performance.act.id}/">${performance.act.name} <i class="fa fa-arrow-circle-right"></i></a>
+              <td><a href="/venues/${performance.venue.id}/">${performance.venue.name} <i class="fa fa-arrow-circle-right"></i></a>
               <td> ${performance.perf_date} | ${performance.perf_time}</td>
-              <td>${performance.contract !== null ? `<a href="/contracts/${performance.contract.id}/">${performance.contract.status}</a>` : ""}
+              <td>${performance.contract !== null ? `<a href="/contracts/${performance.contract.id}/">${performance.contract.status}  <i class="fa fa-arrow-circle-right"></i></a>` : ""}
               </td>
-              <td>&nbsp;</td>
+              <td>Links Here</td>
             </tr>
           `);
         });
@@ -37,4 +37,40 @@
   </tbody>
 </table>
 <br />
-<%= render partial: "perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
+<div class="panel-heading">
+  <strong>Past Shows</strong>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Act</th>
+      <th>Venue</th>
+      <th>Date</th>
+      <th>Contract</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody id="past_performances">
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $.get("/performances/list?time=past", function(data) {
+        var performances = data.performances
+        $.each(performances, function(index, performance) {
+          $('tbody#past_performances').append (`
+            <tr>
+              <td class="col-md-2">${performance.name}</td>
+              <td><a href="/acts/${performance.act.id}/">${performance.act.name} <i class="fa fa-arrow-circle-right"></i></a>
+              <td><a href="/venues/${performance.venue.id}/">${performance.venue.name} <i class="fa fa-arrow-circle-right"></i></a>
+              <td> ${performance.perf_date} | ${performance.perf_time}</td>
+              <td>${performance.contract !== null ? `<a href="/contracts/${performance.contract.id}/">${performance.contract.status} <i class="fa fa-arrow-circle-right"></i></a>` : ""}
+              </td>
+              <td>Links Here</td>
+            </tr>
+          `);
+        });
+      });
+    });
+    </script>
+  </tbody>
+</table>

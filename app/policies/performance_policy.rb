@@ -21,7 +21,7 @@ class PerformancePolicy < ApplicationPolicy
     self.show?
   end
 
-  def performances_upcoming?
+  def performances_listing?
     self.index?
   end
 
