@@ -8,7 +8,6 @@ class DocumentsController < ApplicationController
 
   def create
     authorize @document = Document.new(document_params)
-    puts @document.inspect
     if @document.save
       render json: @document, status: 201
     else
@@ -19,13 +18,18 @@ class DocumentsController < ApplicationController
   end
 
   def edit
+    if @document
+      render json: @document, status: 201
+    else
+      render status: 400
+    end
   end
 
   def update
     if @document.update(document_params)
-      redirect_to contract_path(@document.contract_id)
+      render json: @document, status: 201
     else
-      render 'edit'
+      render status: 400
     end
   end
 
