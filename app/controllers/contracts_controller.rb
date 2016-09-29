@@ -28,6 +28,7 @@ class ContractsController < ApplicationController
   def show
     @approvals = Approval.where(contract_id: @contract.id)
     @documents = Document.where(contract_id: @contract.id)
+    authorize @document = Document.new
   end
 
   def index

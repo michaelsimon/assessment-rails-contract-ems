@@ -8,11 +8,13 @@ class DocumentsController < ApplicationController
 
   def create
     authorize @document = Document.new(document_params)
+    puts @document.inspect
     if @document.save
-      redirect_to contract_path(@document.contract_id)
+      render json: @document, status: 201
     else
-      @contract = Contract.find(params[:contract_id])
-      render 'new'
+      # @contract = Contract.find(params[:contract_id])
+      # render 'new'
+      render status: 400
     end
   end
 

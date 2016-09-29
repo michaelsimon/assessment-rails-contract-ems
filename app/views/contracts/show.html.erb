@@ -23,31 +23,61 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="newDocTitle">New Document</h4>
       </div>
+      <%= form_for [@contract, @document] do |f| %>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="doc-name" class="control-label">Name:</label>
-            <input type="text" class="form-control" id="name">
-          </div>
-          <div class="form-group">
-            <label for="doc-desc" class="control-label">Description:</label>
-            <input type="text" class="form-control" id="description">
-          </div>
-          <div class="form-group">
-            <label for="doc-location" class="control-label">Location:</label>
-            <input type="text" class="form-control" id="location">
-          </div>
-        </form>
+        <!-- <form method="POST" target="/">
+        <div class="form-group">
+        <label for="doc-name" class="control-label">Name:</label>
+        <input type="text" class="form-control" id="name">
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create Document</button>
-      </div>
+      <div class="form-group">
+      <label for="doc-desc" class="control-label">Description:</label>
+      <input type="text" class="form-control" id="description">
     </div>
+    <div class="form-group">
+    <label for="doc-location" class="control-label">Location:</label>
+    <input type="text" class="form-control" id="location">
   </div>
+</form> -->
+
+<%= render partial: "shared/errors", locals: {md: @document} %>
+<%= f.label :name %>
+<%= f.text_field :name, class: "form-control" %><br>
+<%= f.label :description %>
+<%= f.text_field :description, class: "form-control" %><br>
+<%= f.label :location %>
+<%= f.text_field :location, class: "form-control" %><br>
+<%= f.hidden_field :contract_id, value: @contract.id %>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <!-- <button type="button" class="btn btn-primary">Create Document</button> -->
+  <%= f.submit id: "new-doc-btn", class: "btn btn-primary" %>
+</div>
+<% end %>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('form').on('submit', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: event.currentTarget.action,
+      type: 'POST',
+      dataType: 'JSON',
+      data: $(this).serialize()
+    }).done(function(response, stat){
+      $('#documents > tbody').append(`<tr><td><a href="${response.location}">${response.name}</a></td><td>${response.description}</td><td>buttons</td></tr>`)
+      $('#addDocument').modal("hide");
+    });
+  });
+});
+</script>
+
+</div>
+</div>
 </div>
 <div class="panel panel-default col-sm-11">
-  <table class="table">
+  <table class="table" id="documents">
     <thead>
       <tr>
         <th>Document</th>
@@ -78,14 +108,3 @@
     </tbody>
   </table>
 </div>
-<script>
-$('#addDocument').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  // var recipient = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  // modal.find('.modal-title').text('New message to ' + recipient)
-  // modal.find('.modal-body input').val(recipient)
-});
-</script>
