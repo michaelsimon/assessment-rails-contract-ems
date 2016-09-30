@@ -27,7 +27,7 @@ class DocumentsController < ApplicationController
 
   def update
     if @document.update(document_params)
-      render json: @document, status: 201
+      render json: @document, status: 200
     else
       render status: 400
     end
