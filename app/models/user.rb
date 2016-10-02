@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     role == "super_admin" || role == "agent"
   end
 
+  def self.users_for_approval_selection(act, venue)
+    User.where("act_id = ? or venue_id = ? or role in (1,4)", act, venue)
+  end
+
   def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)

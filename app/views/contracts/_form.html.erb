@@ -16,7 +16,7 @@
   <h3>Add Approvers</h3>
   <%= f.fields_for :approvals, @contract.approvals.build do |f_approval| %>
     <%= f_approval.label 'User' %>
-    <%= f_approval.collection_select(:user_id, User.all, :id, :email, {include_blank: 'Select'}, {class: "form-control"}) %><br>
+    <%= f_approval.collection_select(:user_id, User.users_for_approval_selection(@contract.performance.try(:act_id), @contract.performance.try(:venue_id)), :id, :email, {include_blank: 'Select'}, {class: "form-control"}) %><br>
     <%= f_approval.label 'Date Due' %>
     <%= f_approval.date_field :date_requested, class: "form-control" %><br>
   <% end %>
