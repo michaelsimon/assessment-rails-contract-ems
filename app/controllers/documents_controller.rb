@@ -1,18 +1,11 @@
 class DocumentsController < ApplicationController
   before_action :get_document, only: [:show, :edit, :update, :destroy]
 
-  def new
-    authorize @contract = Contract.find(params[:contract_id])
-    authorize @document = Document.new
-  end
-
   def create
     authorize @document = Document.new(document_params)
     if @document.save
       render json: @document, status: 201
     else
-      # @contract = Contract.find(params[:contract_id])
-      # render 'new'
       render status: 400
     end
   end
@@ -37,12 +30,14 @@ class DocumentsController < ApplicationController
     redirect_to @document.location
   end
 
-  # def index
-  # end
-
   def destroy
-    authorize @document.delete if @document
-    redirect_to contract_path(@document.contract)
+    if @document
+      if authorize @document.delete
+        render json: @document, status: 201
+      else
+        render status: 400
+      end
+    end
   end
 
   private

@@ -52,3 +52,13 @@ var documentSubmit = function(event) {
     $('#modalDocument').modal("hide");
   });
 }
+
+var documentDelete = function(event) {
+  event.preventDefault();
+  $.ajax({
+    url: event.currentTarget.href,
+    type: 'DELETE'
+  }).done(function(response, status, jqXHR){
+    $(`tr[data-document-id='${response.id}']`).remove();
+  });
+}
