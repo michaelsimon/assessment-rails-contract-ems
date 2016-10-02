@@ -46,8 +46,8 @@ var documentSubmit = function(event) {
       $('#documents > tbody').append(`<tr doc-id="${response.id}"><td><a href="${response.location}">${response.name}</a></td><td>${response.description}</td><td>buttons</td></tr>`)
     }
     else if (jqXHR.status === 200) {
-      $(`#documents > tbody > tr[data-id="${response.id}"] > td:eq(0) > a`).text(response.name);
-      $(`#documents > tbody > tr[data-id="${response.id}"] > td:eq(1)`).text(response.description);
+      $(`#documents > tbody > tr[data-document-id="${response.id}"] > td:eq(0) > a`).text(response.name);
+      $(`#documents > tbody > tr[data-document-id="${response.id}"] > td:eq(1)`).text(response.description);
     }
     $('#modalDocument').modal("hide");
   });

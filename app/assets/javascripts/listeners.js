@@ -1,4 +1,5 @@
 var attachListeners = function() {
+  
   $('form#approval').on('click', function(event){
     approvalResponse(event);
   });
@@ -19,8 +20,8 @@ var attachListeners = function() {
     performanceDetail(event);
   }
 
-
 }
+
 $(document).ready(function() {
   attachListeners();
 });
