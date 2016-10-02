@@ -1,22 +1,5 @@
 <%= render partial: "edit_links", locals: {resource: @performance, text: true, displaytype: "page"} %>
-<div data-id="<%= @performance.id %>" />
-
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
-  // debugger;
-  var perf_id = $('div[data-id]').attr("data-id");
-  $.get(`/performances/${perf_id}/details`, function(data) {
-    var perf = data.performance_detail;
-    $('#perf_name').append(perf.name);
-    $('#act').append(`<a href="/acts/${perf.act.id}">${perf.act.name}</a>`);
-    $('#venue').append(`<a href="/venues/${perf.venue.id}">${perf.venue.name}</a>`);
-    $('#description').append(perf.description);
-    $('#tickets').append(`<a href=${perf.tkts_url}">${perf.tkts_url}</a>`);
-    $('#date').append(perf.perf_date);
-    $('#time').append(perf.perf_time);
-  });
-});
-</script>
+<div data-performance-id="<%= @performance.id %>" />
 <h1 id='perf_name'></h1>
 <p>
   <% if @performance.try(:contract) %>

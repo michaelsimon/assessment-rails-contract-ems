@@ -14,6 +14,12 @@ var attachListeners = function() {
   $('a#new-doc').on('click', function(event){
     newDocument(event);
   });
+
+  if ($('div[data-performance-id]').length) {
+    performanceDetail(event);
+  }
+
+
 }
 $(document).ready(function() {
   attachListeners();
