@@ -7,18 +7,18 @@
   <td id="buttons">
     <% if approval.status == 'pending' && current_user.try(:id) == approval.user_id %>
     <div style="float: left; padding-left:10px;">
-      <%= button_to contract_apvl_approve_path(approval), class:"btn btn-success btn-sm",  form: {"id" => "approve"}, data: {id: approval.id}  do %>
+      <%= button_to contract_apvl_approve_path, class:"btn btn-success btn-sm",  form: {id: "approval", "data-approval-answer" => "approve", "data-approval-id" => approval.id} do %>
       <strong><%= icon('check') %> Approve</strong>
       <% end %>
     </div>
     <div style="float: left; padding-left:10px;">
-      <%= button_to contract_apvl_reject_path(approval), class:"btn btn-danger btn-sm", form: {"id" => "reject"}, data: {id: approval.id} do %>
+      <%= button_to contract_apvl_reject_path, class:"btn btn-danger btn-sm", form: {id: "approval", "data-approval-answer" => "reject", "data-approval-id" => approval.id} do %>
       <strong><%= icon('times') %> Reject</strong>
       <% end %></div>
       <% end %>
       <% if approval.status == 'pending' && current_user.is_admin %>
       <div style="float: left; padding-left:10px;">
-        <%= button_to contract_apvl_cancel_path(approval), class:"btn btn-warning btn-sm", form: {"id" => "cancel"}, data: {id: approval.id} do %>
+        <%= button_to contract_apvl_cancel_path, class:"btn btn-warning btn-sm", form: {id: "approval", "data-approval-answer" => "cancel", "data-approval-id" => approval.id} do %>
         <strong><%= icon('ban') %> Cancel Approval Request</strong>
         <% end %>
       </div>

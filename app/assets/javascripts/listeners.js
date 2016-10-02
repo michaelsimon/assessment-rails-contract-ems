@@ -1,6 +1,6 @@
 var attachListeners = function() {
-  $('form#approve, form#reject, form#cancel').on('click', function(event){
-    approvalRespone(event);
+  $('form#approval').on('click', function(event){
+    approvalResponse(event);
   });
 }
 
