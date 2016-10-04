@@ -9,6 +9,8 @@ var Performance = function(attr) {
   this.perf_time = attr.perf_time;
   this.tkts_url = attr.tkts_url;
   this.description = attr.description;
+  this.contract_id = (attr.contract ? attr.contract.id : undefined);
+  this.contract_status = (attr.contract ? attr.contract.status : undefined);
 }
 
 Performance.prototype.fmatDate = function() {
@@ -52,4 +54,29 @@ var performanceDetail = function() {
     $('#date').append(perfObject.fmatDate());
     $('#time').append(perfObject.fmatTime());
   });
+}
+
+var performanceList = function() {
+    $.get("/performances/list", function(data) {
+      var performances = data.performances
+      $.each(performances, function(index, performance) {
+          perf = new Performance(performance);
+          if (Date.parse(perf.perf_date) > Date.now()) {
+            time = "upcoming";
+          } else {
+              time = "past";
+            }
+        $(`tbody#${time}_perf`).append (`
+          <tr>
+            <td class="col-md-2">${perf.name}</td>
+            <td><a href="/acts/${perf.act_id}/">${perf.act_name} <i class="fa fa-arrow-circle-right"></i></a>
+            <td><a href="/venues/${perf.venue_id}/">${perf.venue_name} <i class="fa fa-arrow-circle-right"></i></a>
+            <td> ${perf.fmatDate()} @ ${perf.fmatTime()}</td>
+            <td>${perf.contract_id !== undefined ? `<a href="/contracts/${perf.contract_id}/">${perf.contract_status}  <i class="fa fa-arrow-circle-right"></i></a>` : ""}
+            </td>
+            <td>Links Here</td>
+          </tr>
+        `);
+      });
+    });
 }

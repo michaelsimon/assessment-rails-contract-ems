@@ -24,6 +24,10 @@ var attachListeners = function() {
     performanceDetail(event);
   }
 
+  if ($('div[data-performance-list').length) {
+    performanceList(event);
+  }
+
 }
 
 $(document).ready(function() {

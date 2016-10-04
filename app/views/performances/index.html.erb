@@ -2,6 +2,7 @@
 <div class="panel-heading">
   <strong>Upcoming Shows</strong>
 </div>
+<div data-performance-list="true" />
 <table class="table">
   <thead>
     <tr>
@@ -14,32 +15,6 @@
     </tr>
   </thead>
   <tbody id="upcoming_perf">
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $.get("/performances/list", function(data) {
-        var performances = data.performances
-        $.each(performances, function(index, performance) {
-            perf = new Performance(performance);
-            if (Date.parse(perf.perf_date) > Date.now()) {
-              time = "upcoming";
-            } else {
-                time = "past";
-              }
-          $(`tbody#${time}_perf`).append (`
-            <tr>
-              <td class="col-md-2">${perf.name}</td>
-              <td><a href="/acts/${perf.act_id}/">${perf.act_name} <i class="fa fa-arrow-circle-right"></i></a>
-              <td><a href="/venues/${perf.venue_id}/">${perf.venue_name} <i class="fa fa-arrow-circle-right"></i></a>
-              <td> ${perf.fmatDate()} @ ${perf.fmatTime()}</td>
-              <td>${perf.contract !== undefined ? `<a href="/contracts/${perf.contract_id}/">${perf.contract_status}  <i class="fa fa-arrow-circle-right"></i></a>` : ""}
-              </td>
-              <td>Links Here</td>
-            </tr>
-          `);
-        });
-      });
-    });
-    </script>
   </tbody>
 </table>
 <br />

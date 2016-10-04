@@ -1,5 +1,5 @@
 class PerformanceListSerializer < ActiveModel::Serializer
-  attributes :id, :name, :perf_date, :perf_time, :act, :venue
+  attributes :id, :name, :perf_date, :perf_time, :act, :venue, :contract
   has_one :act, serializer: PerformanceActSerializer
   has_one :venue, serializer: PerformanceVenueSerializer
   has_one :contract, serializer: PerformanceContractSerializer
