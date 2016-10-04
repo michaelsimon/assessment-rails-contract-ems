@@ -33,7 +33,7 @@ Performance.prototype.fmatTime = function() {
     return x;
   }
   t = new Date(this.perf_time);
-  hh = t.getUTCHours();
+  hh = ((t.getUTCHours() + 11) % 12 + 1);
   mm = addZeroMins(t.getUTCMinutes());
   ap = amPM(hh)
 
