@@ -24,8 +24,16 @@ var attachListeners = function() {
     performanceDetail(event);
   }
 
-  if ($('div[data-performance-list').length) {
-    performanceList(event);
+  if ($('div[data-performance-all-list]').length) {
+    performanceList({type: "home"});
+  }
+
+  if ($('div[data-performance-venue-list]').length) {
+    performanceList({type: "venue", id: $('div[data-performance-venue-list]').attr('data-performance-venue-list')});
+  }
+
+  if ($('div[data-performance-act-list]').length) {
+    performanceList({type: "act", id: $('div[data-performance-act-list]').attr('data-performance-act-list')});
   }
 
 }

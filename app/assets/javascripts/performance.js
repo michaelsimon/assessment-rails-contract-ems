@@ -24,7 +24,7 @@ Performance.prototype.fmatDate = function() {
 Performance.prototype.fmatTime = function() {
   function addZeroMins(i) {
     if (i < 10) {
-        i = "0" + i;
+      i = "0" + i;
     }
     return i;
   }
@@ -56,27 +56,27 @@ var performanceDetail = function() {
   });
 }
 
-var performanceList = function() {
-    $.get("/performances/list", function(data) {
-      var performances = data.performances
-      $.each(performances, function(index, performance) {
-          perf = new Performance(performance);
-          if (Date.parse(perf.perf_date) > Date.now()) {
-            time = "upcoming";
-          } else {
-              time = "past";
-            }
-        $(`tbody#${time}_perf`).append (`
-          <tr>
-            <td class="col-md-2">${perf.name}</td>
-            <td><a href="/acts/${perf.act_id}/">${perf.act_name} <i class="fa fa-arrow-circle-right"></i></a>
-            <td><a href="/venues/${perf.venue_id}/">${perf.venue_name} <i class="fa fa-arrow-circle-right"></i></a>
-            <td> ${perf.fmatDate()} @ ${perf.fmatTime()}</td>
-            <td>${perf.contract_id !== undefined ? `<a href="/contracts/${perf.contract_id}/">${perf.contract_status}  <i class="fa fa-arrow-circle-right"></i></a>` : ""}
-            </td>
-            <td>Links Here</td>
-          </tr>
+var performanceList = function(params) {
+  $.get("/performances/list", params, function(data) {
+    var performances = data.performances
+    $.each(performances, function(index, performance) {
+      perf = new Performance(performance);
+      if (Date.parse(perf.perf_date) > Date.now()) {
+        time = "upcoming";
+      } else {
+        time = "past";
+      }
+      $(`tbody#${time}_perf`).append (`
+        <tr>
+        <td class="col-md-2">${perf.name}</td>
+        <td><a href="/acts/${perf.act_id}/">${perf.act_name} <i class="fa fa-arrow-circle-right"></i></a>
+        <td><a href="/venues/${perf.venue_id}/">${perf.venue_name} <i class="fa fa-arrow-circle-right"></i></a>
+        <td> ${perf.fmatDate()} @ ${perf.fmatTime()}</td>
+        <td>${perf.contract_id !== undefined ? `<a href="/contracts/${perf.contract_id}/">${perf.contract_status}  <i class="fa fa-arrow-circle-right"></i></a>` : ""}
+        </td>
+        <td>Links Here</td>
+        </tr>
         `);
       });
     });
-}
+  }

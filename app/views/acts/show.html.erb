@@ -1,5 +1,6 @@
 <%= render partial: "edit_links", locals: {resource: @act, text: true, displaytype: "page"} %>
 <h1><%= @act.name %></h1>
+<div data-performance-act-list="<%= @act.id %>" />
 <p><strong>Description:</strong><br />
   <%= @act.description %>
 </p>
@@ -19,6 +20,20 @@
   <p>
     &nbsp;
   </p>
-  <%= render partial: "performances/perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Act</th>
+        <th>Venue</th>
+        <th>Date</th>
+        <th>Contract</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id="upcoming_perf">
+    </tbody>
+    <tbody id="past_perf">
+    </tbody>
+  </table>
   <br />
-  <%= render partial: "performances/perf_table", locals: {title: "Past Shows", collection: @performances_past} %>

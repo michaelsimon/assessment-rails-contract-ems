@@ -38,6 +38,15 @@ class PerformancesController < ApplicationController
 
   def performances_listing
     authorize @performances = policy_scope(Performance).order(perf_date: :desc)
+
+    if params[:type] == "home"
+      @performances = @performances
+    elsif params[:type] == "venue"
+      @performances = @performances.where('venue_id = ?', params[:id])
+    elsif params[:type] == "act"
+      @performances = @performances.where('act_id = ?', params[:id])
+    end
+
     if @performances
       render json: @performances, each_serializer: PerformanceListSerializer, status: 201
     else

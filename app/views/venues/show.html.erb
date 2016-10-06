@@ -1,5 +1,6 @@
 <%= render partial: "edit_links", locals: {resource: @venue, text: true, displaytype: "page"} %>
 <h1><%= @venue.name %></h1>
+<div data-performance-venue-list="<%= @venue.id %>" />
 <p>
   <strong>Address:</strong><br>
   <%= @venue.address %><br>
@@ -20,6 +21,19 @@
 <p>
   &nbsp;
 </p>
-<%= render partial: "performances/perf_table", locals: {title: "Upcoming Shows", collection: @performances_upcoming} %>
-<br />
-<%= render partial: "performances/perf_table", locals: {title: "Past Shows", collection: @performances_past} %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Act</th>
+      <th>Venue</th>
+      <th>Date</th>
+      <th>Contract</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody id="upcoming_perf">
+  </tbody>
+  <tbody id="past_perf">
+  </tbody>
+</table>
