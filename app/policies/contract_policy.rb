@@ -17,4 +17,9 @@ class ContractPolicy < ApplicationPolicy
     user.present? && (user.is_admin || (user.act? && user.act == record.performance.act) || (user.venue? && user.venue == record.performance.venue))
   end
 
+  def contract_detail?
+    self.show?
+  end
+
+
 end

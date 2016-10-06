@@ -1,5 +1,5 @@
 class ContractsController < ApplicationController
-  before_action :get_contract, only: [:show, :edit, :update, :destroy]
+  before_action :get_contract, only: [:show, :edit, :update, :destroy,  :contract_detail]
 
   def new
     authorize @contract = Contract.new
@@ -28,7 +28,15 @@ class ContractsController < ApplicationController
   def show
     @approvals = Approval.where(contract_id: @contract.id)
     @documents = Document.where(contract_id: @contract.id)
-    authorize @document = Document.new
+    @document = Document.new
+  end
+
+  def contract_detail
+    if @contract
+      render json: @contract, serializer: ContractSerializer, status: 201
+    else
+      render status: 400
+    end
   end
 
   def index

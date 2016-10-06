@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'general#welcome'
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   resources :acts
+  get 'contracts/:id/details' => 'contracts#contract_detail'
   resources :contracts do
     resources :documents, only: [:new, :create, :edit, :update, :destroy, :show], as: :documents
   end
