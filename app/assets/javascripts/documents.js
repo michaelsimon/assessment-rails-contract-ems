@@ -18,15 +18,16 @@ var editDocumentInfo = function(event) {
   event.preventDefault();
   $.get(event.currentTarget.pathname, function() {
   }).done(function(response, stat){
+    doc = response.document
     $('form').attr({
       class: 'edit_document',
       id: `edit_document`,
-      action: `/contracts/${response.contract_id}/documents/${response.id}`
+      action: `/contracts/${doc.contract_id}/documents/${doc.id}`
     });
     $('form').append('<input type="hidden" name="_method" value="patch" />');
-    $('#document_name').val(response.name);
-    $('#document_description').val(response.description);
-    $('#document_location').val(response.location);
+    $('#document_name').val(doc.name);
+    $('#document_description').val(doc.description);
+    $('#document_location').val(doc.location);
     $('#modalDocTitle').html("Edit Document");
     $('#modalSubmit').attr('value','Update Document');
     $('#modalDocument').modal("show");
@@ -42,12 +43,13 @@ var documentSubmit = function(event) {
     dataType: 'JSON',
     data: $('#new_document, #edit_document').serialize()
   }).done(function(response, status, jqXHR){
+    doc = response.document;
     if (jqXHR.status === 201) {
-      $('#documents > tbody').append(`<tr doc-id="${response.id}"><td><a href="${response.location}">${response.name}</a></td><td>${response.description}</td><td>buttons</td></tr>`)
+      $('#documents > tbody').append(`<tr doc-id="${doc.id}"><td><a href="${doc.location}">${doc.name}</a></td><td>${doc.description}</td><td>buttons</td></tr>`)
     }
     else if (jqXHR.status === 200) {
-      $(`#documents > tbody > tr[data-document-id="${response.id}"] > td:eq(0) > a`).text(response.name);
-      $(`#documents > tbody > tr[data-document-id="${response.id}"] > td:eq(1)`).text(response.description);
+      $(`#documents > tbody > tr[data-document-id="${doc.id}"] > td:eq(0) > a`).text(doc.name);
+      $(`#documents > tbody > tr[data-document-id="${doc.id}"] > td:eq(1)`).text(response.description);
     }
     $('#modalDocument').modal("hide");
   });
@@ -59,6 +61,6 @@ var documentDelete = function(event) {
     url: event.currentTarget.href,
     type: 'DELETE'
   }).done(function(response, status, jqXHR){
-    $(`tr[data-document-id='${response.id}']`).remove();
+    $(`tr[data-document-id='${response.document.id}']`).remove();
   });
 }
