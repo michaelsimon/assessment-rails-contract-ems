@@ -1,3 +1,3 @@
 class DocumentSerializer < ActiveModel::Serializer
-  attributes :id, :contract_id, :name, :description, :location
+  attributes :id, :contract_id, :name, :description
 end
