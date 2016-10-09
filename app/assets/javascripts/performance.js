@@ -42,7 +42,7 @@ Performance.prototype.fmatTime = function() {
 
 var performanceDetail = function() {
   perf_id = $('div[data-performance-id]').attr("data-performance-id");
-  $.get(`/performances/${perf_id}/details`, function(data) {
+  $.get(`/performances/${perf_id}/details`, function() {}).done(function(data) {
 
     var perfObject =  new Performance(data.performance_detail);
 
@@ -53,11 +53,13 @@ var performanceDetail = function() {
     $('#tickets').append(`<a href=${perfObject.tkts_url}">${perfObject.tkts_url}</a>`);
     $('#date').append(perfObject.fmatDate());
     $('#time').append(perfObject.fmatTime());
+  }).error(function() {
+    alert("There was an error loading the performance information. Please try again.");
   });
 }
 
 var performanceList = function(params) {
-  $.get("/performances/list", params, function(data) {
+  $.get("/performances/list", params, function(){}).done(function(data) {
     var performances = data.performances
     $.each(performances, function(index, performance) {
       perf = new Performance(performance);
@@ -78,5 +80,7 @@ var performanceList = function(params) {
         </tr>
         `);
       });
+    }).error(function() {
+      alert("There was an error loading the listing of performances. Please try again.");
     });
   }
