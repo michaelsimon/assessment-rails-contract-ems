@@ -1,5 +1,6 @@
 var Document = function(attr) {
   this.id = attr.id;
+  this.contract_id = attr.contract_id;
   this.name = attr.name;
   this.description = attr.description;
 }
@@ -37,7 +38,9 @@ var editDocumentInfo = function(event) {
     $('#modalDocTitle').html("Edit Document");
     $('#modalSubmit').attr('value','Update Document');
     $('#modalDocument').modal("show");
-  });
+  }).error(function() {
+    alert("There was an error processing your Edit Document request. Please try again.")
+  });;
 }
 
 
@@ -51,13 +54,15 @@ var documentSubmit = function(event) {
   }).done(function(response, status, jqXHR){
     doc = new Document(response.document);
     if (jqXHR.status === 201) {
-      $('#documents > tbody').append(`<tr doc-id="${doc.id}"><td><a href="${doc.location}">${doc.name}</a></td><td>${doc.description}</td><td>buttons</td></tr>`)
+      $('#documents').append(`<tr doc-id="${doc.id}"><td><a href="/contracts/${doc.contract_id}/documents/${doc.id}">${doc.name}</a></td><td>${doc.description}</td><td>buttons</td></tr>`)
     }
     else if (jqXHR.status === 200) {
       $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(0) > a`).text(doc.name);
       $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(1)`).text(response.description);
     }
     $('#modalDocument').modal("hide");
+  }).error(function() {
+    alert("There was an error processing your Document create/update request. Please try again.")
   });
 }
 
@@ -68,5 +73,7 @@ var documentDelete = function(event) {
     type: 'DELETE'
   }).done(function(response, status, jqXHR){
     $(`tr[data-document-id='${response.document.id}']`).remove();
-  });
+  }).error(function() {
+    alert("There was an error processing your Document delete request. Please try again.")
+  });;
 }
