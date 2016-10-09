@@ -19,5 +19,4 @@
 //= require performance
 //= require approval
 //= require document
-//= require
 //= require_tree .

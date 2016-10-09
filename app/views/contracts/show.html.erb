@@ -1,17 +1,18 @@
 <%= render partial: "edit_links", locals: {resource: @contract,  text: true, displaytype: "page"} %>
-<h1><%= @contract.performance.name %></h1>
+<h1 id="perfomance_name"></h1>
+<div data-contract-id="<%= @contract.id %>" />
 <p>
-  <strong>Date: </strong><%= fmatdate(@contract.performance.perf_date) %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , performance_path(@contract.performance) %><br>
-  <strong>Venue: </strong><%= @contract.performance.venue.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , venue_path(@contract.performance.venue) %><br>
-  <strong>Act: </strong><%= @contract.performance.act.name %> <%= link_to "#{icon('arrow-circle-right')}".html_safe , act_path(@contract.performance.act) %>
+  <strong>Date: </strong><span id="perf_date"></span><br>
+  <strong>Venue: </strong><span id="venue"></span><br>
+  <strong>Act: </strong><span id="act"></span>
 </p>
 <p>
-  <strong>Submit Date: </strong><%= fmatdate(@contract.submit_date) %><br>
-  <strong>Due Date: </strong><%= fmatdate(@contract.due_date) %><br>
-  <strong>Status: </strong><%= @contract.status_value %>
+  <strong>Submit Date: </strong><span id="submit_date"></span><br>
+  <strong>Due Date: </strong><span id="due_date"></span><br>
+  <strong>Status: </strong><span id="contract_status"></span>
 </p>
 <p>
-  <strong>Contract Details: </strong><br /><%= @contract.performance.description %>
+  <strong>Contract Details: </strong><br /><span id="contract_details"></span>
 </p>
 <h3>Documents</h3>
 <% if policy(:contract).new? %><p><%= link_to "#{icon('file-o')} New Document".html_safe, "#", id: "new-doc"%></p><% end %>
@@ -42,7 +43,7 @@
   </div>
 </div>
 <div class="panel panel-default col-sm-11">
-  <table class="table" id="documents">
+  <table class="table">
     <thead>
       <tr>
         <th>Document</th>
@@ -50,7 +51,7 @@
         <th>&nbsp;</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="documents">
       <%= render partial: "document", collection: @documents %>
     </tbody>
   </table>
