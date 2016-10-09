@@ -38,7 +38,7 @@ Contract.prototype.curStatus = function() {
 
 var contractDetail = function() {
   contract_id = $('div[data-contract-id]').attr("data-contract-id");
-  $.get(`/contracts/${contract_id}/details`, function(data) {
+  $.get(`/contracts/${contract_id}/details`, function(){}).done(function(data){
 
     var contractObject =  new Contract(data.contract);
 
@@ -57,5 +57,7 @@ var contractDetail = function() {
       $('#documents').append(`<tr doc-id="${documentObject.id}"><td><a href="/contracts/${contractObject.id}/documents/${documentObject.id}">${documentObject.name}</a></td><td>${documentObject.description}</td><td>buttons</td></tr>`);
     });
 
+  }).error(function() {
+    alert("There was an error loading the contract information. Please try again.");
   });
 }
