@@ -1,3 +1,9 @@
+var Document = function(attr) {
+  this.id = attr.id;
+  this.name = attr.name;
+  this.description = attr.description;
+}
+
 var newDocument = function(event) {
   event.preventDefault();
   $('form#new_document, form#edit_document').attr({
@@ -48,8 +54,8 @@ var documentSubmit = function(event) {
       $('#documents > tbody').append(`<tr doc-id="${doc.id}"><td><a href="${doc.location}">${doc.name}</a></td><td>${doc.description}</td><td>buttons</td></tr>`)
     }
     else if (jqXHR.status === 200) {
-      $(`#documents > tbody > tr[data-document-id="${doc.id}"] > td:eq(0) > a`).text(doc.name);
-      $(`#documents > tbody > tr[data-document-id="${doc.id}"] > td:eq(1)`).text(response.description);
+      $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(0) > a`).text(doc.name);
+      $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(1)`).text(response.description);
     }
     $('#modalDocument').modal("hide");
   });

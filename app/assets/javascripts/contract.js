@@ -24,16 +24,12 @@ Contract.prototype.curStatus = function() {
   switch(this.status) {
     case 'pend' : fullStatus = "Pending"
     break;
-
     case 'submit' : fullStatus = "Submitted";
     break;
-
     case 'app' : fullStatus = "Approved";
     break;
-
     case 'ff' : fullStatus = "Fulfilled";
     break;
-
     case 'cancel' : fullStatus = "Cancelled";
     break;
   }
@@ -54,6 +50,14 @@ var contractDetail = function() {
     $('#submit_date').append(contractObject.fmatDate(contractObject.submit_date));
     $('#perf_date').append(contractObject.fmatDate(contractObject.perf_date));
     $('#contract_status').append(contractObject.curStatus());
+
+    var allDocuments = data.contract.documents;
+    // debugger;
+    allDocuments.forEach(function(document){
+
+      documentObject = new Document(document);
+      $('#documents').append(`<tr doc-id="${documentObject.id}"><td><a href="/contracts/${contractObject.id}/documents${documentObject.id}">${documentObject.name}</a></td><td>${documentObject.description}</td><td>buttons</td></tr>`);
+    });
 
   });
 }
