@@ -1,5 +1,0 @@
-<tr data-document-id="<%= document.id %>">
-  <td><%= link_to document.name, contract_document_path(@contract, document) %></td>
-  <td><%= document.description %></td>
-  <td><% if policy(:document).edit? %><%= link_to "#{icon('pencil')} Edit".html_safe, edit_contract_document_path(@contract, document), id: "edit-doc" %>&nbsp;&nbsp;&nbsp;<%= link_to "#{icon('trash-o')} Delete".html_safe, contract_document_path(@contract, document), id: "del-doc" %><% end %></td>
-</tr>
