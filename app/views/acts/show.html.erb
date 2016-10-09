@@ -1,9 +1,9 @@
 <%= render partial: "edit_links", locals: {resource: @act, text: true, displaytype: "page"} %>
 <h1><%= @act.name %></h1>
 <div data-performance-act-list="<%= @act.id %>" />
-<p><strong>Description:</strong><br />
-  <%= @act.description %>
-</p>
+  <p><strong>Description:</strong><br />
+    <%= @act.description %>
+  </p>
   <p>
     <strong># of Performances: </strong><%= @act.num_of_performances %><br>
     <strong>Location: </strong><%= @act.location %><br>
@@ -20,6 +20,8 @@
   <p>
     &nbsp;
   </p>
+
+  <h4>Performances:</h4>
   <table class="table">
     <thead>
       <tr>
