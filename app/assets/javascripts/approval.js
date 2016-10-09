@@ -10,5 +10,7 @@ var approvalResponse = function(event){
       $(`[data-approval-id="${response.id}"] > td#date_answered`).text(response.date_answered);
       $(`[data-approval-id="${response.id}"] > td#status`).text(response.status);
       $(`[data-approval-id="${response.id}"] > td#buttons`).text("")
+    }).error(function() {
+      alert("There was an error processing your response submission. Please try again.")
     });
 }
