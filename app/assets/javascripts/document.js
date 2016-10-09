@@ -49,7 +49,7 @@ var documentSubmit = function(event) {
     dataType: 'JSON',
     data: $('#new_document, #edit_document').serialize()
   }).done(function(response, status, jqXHR){
-    doc = response.document;
+    doc = new Document(response.document);
     if (jqXHR.status === 201) {
       $('#documents > tbody').append(`<tr doc-id="${doc.id}"><td><a href="${doc.location}">${doc.name}</a></td><td>${doc.description}</td><td>buttons</td></tr>`)
     }
