@@ -40,7 +40,7 @@ var editDocumentInfo = function(event) {
     $('#modalDocument').modal("show");
   }).error(function() {
     alert("There was an error processing your Edit Document request. Please try again.")
-  });;
+  });
 }
 
 
@@ -75,5 +75,5 @@ var documentDelete = function(event) {
     $(`tr[data-document-id='${response.document.id}']`).remove();
   }).error(function() {
     alert("There was an error processing your Document delete request. Please try again.")
-  });;
+  });
 }
