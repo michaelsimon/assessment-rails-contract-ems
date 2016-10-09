@@ -11,6 +11,7 @@ var Performance = function(attr) {
   this.description = attr.description;
   this.contract_id = (attr.contract ? attr.contract.id : undefined);
   this.contract_status = (attr.contract ? attr.contract.status : undefined);
+  this.rights = attr.rights;
 }
 
 Performance.prototype.fmatDate = function() {
@@ -76,7 +77,7 @@ var performanceList = function(params) {
         <td> ${perf.fmatDate()} @ ${perf.fmatTime()}</td>
         <td>${perf.contract_id !== undefined ? `<a href="/contracts/${perf.contract_id}/">${perf.contract_status}  <i class="fa fa-arrow-circle-right"></i></a>` : ""}
         </td>
-        <td>Links Here</td>
+        <td>${perf.rights}</td>
         </tr>
         `);
       });
