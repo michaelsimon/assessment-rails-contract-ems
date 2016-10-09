@@ -54,7 +54,7 @@ var contractDetail = function() {
     var allDocuments = data.contract.documents;
     allDocuments.forEach(function(document){
       documentObject = new Document(document);
-      $('#documents').append(`<tr doc-id="${documentObject.id}"><td><a href="/contracts/${contractObject.id}/documents/${documentObject.id}">${documentObject.name}</a></td><td>${documentObject.description}</td><td>buttons</td></tr>`);
+      $('#documents').append(`<tr doc-id="${documentObject.id}"><td><a href="/contracts/${contractObject.id}/documents/${documentObject.id}">${documentObject.name}</a></td><td>${documentObject.description}</td><td>${documentObject.rights}</td></tr>`);
     });
 
   }).error(function() {

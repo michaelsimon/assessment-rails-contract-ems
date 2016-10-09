@@ -3,6 +3,7 @@ var Document = function(attr) {
   this.contract_id = attr.contract_id;
   this.name = attr.name;
   this.description = attr.description;
+  this.rights = attr.rights;
 }
 
 var newDocument = function(event) {
