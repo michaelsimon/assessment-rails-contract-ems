@@ -8,6 +8,10 @@ var attachListeners = function() {
     documentSubmit(event);
   });
 
+  if ($('div[data-contract-id]').length) {
+    contractDetail(event);
+  }
+
   $('a#edit-doc').on('click', function(event){
     editDocumentInfo(event);
   });

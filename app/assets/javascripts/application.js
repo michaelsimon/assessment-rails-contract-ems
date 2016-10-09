@@ -15,5 +15,9 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require listeners
-//= require approvals
+//= require contract
+//= require performance
+//= require approval
+//= require document
+//= require
 //= require_tree .
