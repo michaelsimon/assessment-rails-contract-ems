@@ -12,15 +12,15 @@ var attachListeners = function() {
     contractDetail(event);
   }
 
-  $('a#edit-doc').on('click', function(event){
+  $('#documents').on('click', 'a#edit-doc', function(event){
     editDocumentInfo(event);
   });
 
-  $('a#new-doc').on('click', function(event){
+  $('#new-doc').on('click', function(event){
     newDocument(event);
   });
 
-  $('a#del-doc').on('click', function(event){
+  $('#documents').on('click', 'a#del-doc', function(event){
     documentDelete(event);
   });
 
