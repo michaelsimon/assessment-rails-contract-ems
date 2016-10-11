@@ -33,7 +33,7 @@ class DocumentsController < ApplicationController
   def destroy
     if @document
       if authorize @document.delete
-        render json: @document, status: 201
+        render json: {:id => @document.id}, status: 201
       else
         render status: 400
       end
