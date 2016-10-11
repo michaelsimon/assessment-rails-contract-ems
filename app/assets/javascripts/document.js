@@ -3,6 +3,7 @@ var Document = function(attr) {
   this.contract_id = attr.contract_id;
   this.name = attr.name;
   this.description = attr.description;
+  this.location = attr.location;
   this.rights = attr.rights;
 }
 
@@ -55,11 +56,11 @@ var documentSubmit = function(event) {
   }).done(function(response, status, jqXHR){
     doc = new Document(response.document);
     if (jqXHR.status === 201) {
-      $('#documents').append(`<tr doc-id="${doc.id}"><td><a href="/contracts/${doc.contract_id}/documents/${doc.id}">${doc.name}</a></td><td>${doc.description}</td><td>buttons</td></tr>`)
+      $('#documents').append(`<tr data-document-id="${doc.id}"><td><a href="/contracts/${doc.contract_id}/documents/${doc.id}">${doc.name}</a></td><td>${doc.description}</td><td>${doc.rights}</td></tr>`)
     }
     else if (jqXHR.status === 200) {
       $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(0) > a`).text(doc.name);
-      $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(1)`).text(response.description);
+      $(`#documents > tr[data-document-id="${doc.id}"] > td:eq(1)`).text(doc.description);
     }
     $('#modalDocument').modal("hide");
   }).error(function() {
@@ -69,11 +70,12 @@ var documentSubmit = function(event) {
 
 var documentDelete = function(event) {
   event.preventDefault();
+  // debugger;
   $.ajax({
     url: event.currentTarget.href,
-    type: 'DELETE'
+    type: 'DELETE',
   }).done(function(response, status, jqXHR){
-    $(`tr[data-document-id='${response.document.id}']`).remove();
+    $(`tr[data-document-id='${response.id}']`).remove();
   }).error(function() {
     alert("There was an error processing your Document delete request. Please try again.")
   });
