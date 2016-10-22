@@ -70,7 +70,7 @@ var performanceList = function(params) {
         time = "past";
       }
       $(`tbody#${time}_perf`).append (`
-        <tr>
+        <tr data-performance-id="${perf.id}">
         <td class="col-md-2">${perf.name}</td>
         <td><a href="/acts/${perf.act_id}/">${perf.act_name} <i class="fa fa-arrow-circle-right"></i></a>
         <td><a href="/venues/${perf.venue_id}/">${perf.venue_name} <i class="fa fa-arrow-circle-right"></i></a>
@@ -83,5 +83,17 @@ var performanceList = function(params) {
       });
     }).error(function() {
       alert("There was an error loading the listing of performances. Please try again.");
+    });
+  }
+  var performanceDelete = function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: event.currentTarget.href,
+      type: 'DELETE',
+      dataType: 'JSON'
+    }).done(function(response, status, jqXHR){
+      $(`tr[data-performance-id='${response.id}']`).remove();
+    }).error(function() {
+      alert("There was an error processing your Performance delete request. Please try again.")
     });
   }

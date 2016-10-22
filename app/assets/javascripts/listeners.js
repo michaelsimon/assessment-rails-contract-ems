@@ -20,13 +20,17 @@ var attachListeners = function() {
     newDocument(event);
   });
 
-  $('#documents').on('click', 'a#del-doc', function(event){
-    documentDelete(event);
+  $('#upcoming_perf, #past_perf').on('click', 'a#del-perf', function(event){
+    performanceDelete(event);
   });
 
   if ($('div[data-performance-id]').length) {
     performanceDetail(event);
   }
+
+  $('#documents').on('click', 'a#del-doc', function(event){
+    documentDelete(event);
+  });
 
   if ($('div[data-performance-all-list]').length) {
     performanceList({type: "home"});

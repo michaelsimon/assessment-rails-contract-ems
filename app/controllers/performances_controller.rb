@@ -58,8 +58,17 @@ class PerformancesController < ApplicationController
   end
 
   def destroy
-    @performance.delete if @performance
-    redirect_to performances_path
+    if @performance
+      if authorize @performance.delete
+        respond_to do |format|
+          format.json {render json: {:id => @performance.id}, status: 201}
+          format.html {redirect_to performances_path}
+
+        end
+      else
+        render status: 400
+      end
+    end
   end
 
   private
